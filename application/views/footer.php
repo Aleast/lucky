@@ -3,4 +3,4 @@
             <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 <a href="https://www.kwor.cn/" target="_blank">kwor</a>. All rights reserved.</span>
             <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">make by kwor</span>
           </div>
-        </footer>
+</footer>
