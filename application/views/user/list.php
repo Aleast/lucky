@@ -1,118 +1,166 @@
-<html class="x-admin-sm">
-  <head>
-    <meta charset="UTF-8">
-    <title>欢迎页面</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-    <link rel="stylesheet" href="/static/css/font.css">
-    <link rel="stylesheet" href="/static/css/xadmin.css">
-    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="/static/vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/static/vendors/base/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <link rel="stylesheet" href="/static/css/xadmin.css">
+
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/static/css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="/static/images/favicon.png" />
+  
+  <script type="text/javascript" src="/static/js/jquery.min.js"></script>
     <script type="text/javascript" src="/static/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/static/js/xadmin.js"></script>
     <script type="text/javascript" src="/static/js/cookie.js"></script>
-    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-    <!--[if lt IE 9]>
-      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  
-  <body>
-    <div class="x-nav">
-      <span class="layui-breadcrumb">
-       
-        <a>
-          <cite>会员管理</cite></a>
-      </span>
-      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
-    </div>
-    <div class="x-body">
-    
+</head>
 
-      <xblock>
-<!--        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
-<!--       <button class="layui-btn" onclick="x_admin_show('添加用户','/listin/add',600,400)"><i class="layui-icon"></i>添加</button>-->
-       <!-- <span class="x-right" style="line-height:40px">共有数据：88 条</span>-->
-      </xblock>
-      <table class="layui-table x-admin">
-        <thead>
-          <tr>
-            <th>
-              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
+<body>
+  <div class="container-scroller">
+    <!-- partial:/static/partials/_navbar.html -->
+    <?php @$this->load->view("top");?>
+
+
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:/static/partials/_sidebar.html -->
+      <?php @$this->load->view("left");?>
+
+      <!-- partial -->
+      <div class="main-panel">
+      <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-12 grid-margin">
+              <div class="d-flex justify-content-between flex-wrap">
+                <div class="d-flex align-items-end flex-wrap">
+                  <div class="d-flex">
+                    <i class="mdi mdi-home text-muted hover-cursor"></i>
+                    <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;系统管理&nbsp;/&nbsp;</p>
+                    <p class="text-primary mb-0 hover-cursor">客户信息</p>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-end flex-wrap">
+                  <!-- <button type="button" class="btn btn-light bg-white btn-icon mr-3 d-none d-md-block ">
+                    <i class="mdi mdi-download text-muted"></i>
+                  </button>
+                  <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
+                    <i class="mdi mdi-clock-outline text-muted"></i>
+                  </button> -->
+                  <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0" onclick="x_admin_show('新增','/user/add?>',600,400)">
+                    <i class="mdi mdi-plus text-muted"></i>
+                  </button>
+                  <!-- <button class="btn btn-primary mt-2 mt-xl-0">Download report</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+      <div class="row">
             
-            <th>昵称</th>
-            <th>电话</th>
-            <th>时间</th>
-  			<th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
+      <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">客户信息</h4>
+                  <!-- <p class="card-description">
+                    Add class <code>.table</code>
+                  </p> -->
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>昵称</th>
+                          <th>电话</th>
+                          <th>时间</th>
+                          <th>操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                      <?php foreach ($list as $item): ?>
+                        <tr>
+                          <td><?= @$i=$i+1 ?></td>
+                          <td><?=$item['nickName']?></td>
+                          <td><?=$item['phone']?></td>
+                          <td><?=$item['addtime']?></td>
+                         
+                          <td> <?php if ($item['is_use'] === '0'): ?>
+
+                            <label class="badge badge-danger" onclick="stop(this,<?=$item['id']?>)">停用</label>
+
+<?php elseif ($item['is_use'] === '1'): ?>
+
+  <label class="badge badge-danger" onclick="stop(this,<?=$item['id']?>)">启用</label>
+
+<?php else: ?>
+  <label class="badge badge-danger" >未知</label>
+
+<?php endif; ?>
+</td>
 
 
+<td>
+              <label class="badge badge-info" onclick="x_admin_show('编辑','/user/edit?id=<?=$item['id']?>',600,400)">编辑</label>
 
-<?php foreach ($list as $item): ?>
+              <label class="badge badge-success" onclick="x_admin_show('修改密码','/user/cpass?id=<?=$item['id']?>',600,400)">修改密码</label>
 
-          <tr>
-            <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='<?=$item['id']?>'><i class="layui-icon">&#xe605;</i></div>
+              <label class="badge badge-warning" onclick="member_del(this,<?=$item['id']?>)">删除</label>
+
+
             </td>
-         
-            <td><?=$item['nickName']?></td>
-             <td><?=$item['phone']?></td>
-             <td><?=$item['addtime']?></td>
-			  <td class="td-status">
-
-
-
-
-				  <span onclick="x_admin_show('编辑','/wxuser/edit?id=<?=$item['id']?>',600,460)" class="layui-btn layui-btn-normal layui-btn-mini" >设置间隔</span>
-
-
-
-				  <?php if ($item['is_use'] === '0'): ?>
-
-					  <span class="layui-btn layui-btn-normal layui-btn-mini" onclick="stop(this,<?=$item['id']?>)">停用</span>
-
-				  <?php elseif ($item['is_use'] === '1'): ?>
-
-					  <span class="layui-btn layui-btn-normal layui-btn-disabled" onclick="stop(this,<?=$item['id']?>)">启用</span>
-
-				  <?php else: ?>
-
-					  <span class="layui-btn layui-btn-normal layui-btn-mini" >未知</span>
-
-				  <?php endif; ?>
-
-
-
-			  </td>
-
+                        </tr>
+ <?php endforeach;?>           
+                        
+                      </tbody>
+                    </table>
+                    <div id="pages"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
       
-              
+
+          
 
 
-
- <?php endforeach;?>
-
-     
-        </tbody>
-      </table>
-     <!--<div class="page">
-        <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
-        </div>
-      </div>-->
-      <div id="pages"></div>
+                       
+        <!-- content-wrapper ends -->
+        <!-- partial:/static/partials/_footer.html -->
+        <?php @$this->load->view("footer");?>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
     </div>
-    <script>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  
+
+    <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="/static/vendors/base/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- inject:js -->
+  <script src="/static/js/off-canvas.js"></script>
+  <script src="/static/js/hoverable-collapse.js"></script>
+  <script src="/static/js/template.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="/static/js/file-upload.js"></script>
+  <!-- End custom js for this page-->
+</body>
+
+
+<script>
  
  layui.use(['laypage', 'layer'], function(){
    var laypage = layui.laypage
@@ -145,56 +193,6 @@
 });
 </script>
     <script>
-		/*用户-停用*/
-		function stop(obj,id){
-			layer.confirm('确认要操作吗？',function(index){
-
-				//var strObj = eval("(" + {"id":id} + ")");
-				var strObj={"id":id}
-
-				console.log(strObj);
-				$.ajax({
-					url:"/wxuser/setuse",
-					type:'get',//method请求方式，get或者post
-					dataType:'json',//预期服务器返回的数据类型
-					data:strObj,//表格数据序列化
-					contentType: "application/json; charset=utf-8",
-					success:function(data){//res为相应体,function为回调函数
-
-
-						if(data.status=="true"){
-
-							if($(obj).html()=='启用'){
-
-
-
-								$(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('停用');
-								layer.msg('已停用!',{icon: 5,time:1000});
-
-							}else{
-
-
-								$(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('启用');
-								layer.msg('已启用!',{icon: 5,time:1000});
-							}
-
-
-
-						}else{
-							layer.alert(data.status,{icon: 5});
-						}
-					},
-					error:function(){
-
-						layer.alert('操作失败！！！',{icon:5});
-					}
-				});
-
-
-
-
-			});
-		}
       layui.use('laydate', function(){
         var laydate = layui.laydate;
         
@@ -206,19 +204,72 @@
         //执行一个laydate实例
         laydate.render({
           elem: '#end' //指定元素
-          ,type: 'month'
         });
       });
 
+       /*用户-停用*/
+      function stop(obj,id){
+          layer.confirm('确认要操作吗？',function(index){
+
+			  //var strObj = eval("(" + {"id":id} + ")");
+			  var strObj={"id":id}
+
+			  console.log(strObj);
+        	  $.ajax({
+                  url:"/member/setuse",
+                  type:'get',//method请求方式，get或者post
+                  dataType:'json',//预期服务器返回的数据类型
+                  data:strObj,//表格数据序列化
+                  contentType: "application/json; charset=utf-8",
+              success:function(data){//res为相应体,function为回调函数
+                  
+                   
+                  if(data.status=="true"){
+                  	 	
+                	  if($(obj).html()=='启用'){
+
+                        
+
+                          $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('停用');
+                          layer.msg('已停用!',{icon: 5,time:1000});
+
+                        }else{
+                       
+
+                          $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('启用');
+                          layer.msg('已启用!',{icon: 5,time:1000});
+                        }
+
+                	  
+                   
+                  }else{
+                       layer.alert(data.status,{icon: 5});
+                  }
+              },
+              error:function(){
+
+                  layer.alert('操作失败！！！',{icon:5});
+              }
+       });
+
+
+              
+              
+
+
+              
+              
+          });
+      }
 
       /*用户-删除*/
       function member_del(obj,id){
+          
           layer.confirm('确认要删除吗？',function(index){
-              
-              var strObj={"list":id}
-               //发异步删除数据
+        	  strObj={"dellist":id}
+              //发异步删除数据
                  $.ajax({
-                        url:"/listin/delall",
+                        url:"/member/delall",
                         type:'get',//method请求方式，get或者post
                         dataType:'json',//预期服务器返回的数据类型
                         data:strObj,//表格数据序列化
@@ -238,24 +289,23 @@
                         layer.alert('操作失败！！！',{icon:5});
                     }
              });
-                 
-           //   $(obj).parents("tr").remove();
-            //  layer.msg('已删除!',{icon:1,time:1000});
+            
+              
           });
       }
 
 
 
       function delAll (argument) {
+
         var data = tableCheck.getData();
-        strObj={"list":data}
+        strObj={"dellist":data}
         
         layer.confirm('确认要删除吗？'+data,function(index){
             //捉到所有被选中的，发异步进行删除
             
-            
              $.ajax({
-                        url:"/listin/delall",
+                        url:"/member/delall",
                         type:'get',//method请求方式，get或者post
                         dataType:'json',//预期服务器返回的数据类型
                         data:strObj,//表格数据序列化
@@ -275,18 +325,14 @@
                         layer.alert('操作失败！！！',{icon:5});
                     }
              });
-             
-           // layer.msg('删除成功', {icon: 1});
-           //$(".layui-form-checked").not('.header').parents('tr').remove();
+            
+            
+           
+
+
+
+            
         });
-
-
-
-
-        
       }
     </script>
-  
-  </body>
-
 </html>

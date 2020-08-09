@@ -35,16 +35,41 @@
       <!-- partial -->
       <div class="main-panel">
       <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-12 grid-margin">
+              <div class="d-flex justify-content-between flex-wrap">
+                <div class="d-flex align-items-end flex-wrap">
+                  <div class="d-flex">
+                    <i class="mdi mdi-home text-muted hover-cursor"></i>
+                    <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;系统设置&nbsp;/&nbsp;</p>
+                    <p class="text-primary mb-0 hover-cursor">系统设置</p>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-end flex-wrap">
+                  <!-- <button type="button" class="btn btn-light bg-white btn-icon mr-3 d-none d-md-block ">
+                    <i class="mdi mdi-download text-muted"></i>
+                  </button>
+                  <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
+                    <i class="mdi mdi-clock-outline text-muted"></i>
+                  </button> -->
+                  <!-- <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0" onclick="x_admin_show('新增','/user/add?>',600,400)">
+                    <i class="mdi mdi-plus text-muted"></i>
+                  </button> -->
+                  <!-- <button class="btn btn-primary mt-2 mt-xl-0">Download report</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
       <div class="row">
             
            
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Basic form elements</h4>
-                  <p class="card-description">
+                  <h4 class="card-title">系统设置</h4>
+                  <!-- <p class="card-description">
                     Basic form elements
-                  </p>
+                  </p> -->
                   <form class="forms-sample layui-form">
                     <div class="form-group">
                       <label for="exampleInputName1">系统公告</label>
@@ -54,26 +79,45 @@
                       <label for="exampleInputEmail3">发帖间隔</label>
                       <input type="text" class="form-control" name="step" id="exampleInputEmail3" placeholder="发帖间隔" value='<?=$info->step?>' >
                     </div>
-                 
+                    
                     <div class="form-group">
+                      <label>Logo</label>
+                      <div class="item-thumbnail">
+                        <img src="../static/images/logo.svg" alt="image" class="profile-pic">
+                        <input type="hidden" name="logo" value="<?=$info->logo?>" id="simg">
+                      </div>
+                    </div>
+                    
+                      <div class="form-group">
+                        
+                        <input type="file" name="img[]" class="file-upload-default">
+                        <div class="input-group">
+                          <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                          <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                          </span>
+                        </div>
+                      </div>
+
+                    <!-- <div class="form-group">
                       <label>logo</label>
                       <input type="file" name="img[]" class="file-upload-default">
                       <div class="input-group col-xs-12">
                     
                       <div class="layui-upload">
-						<input type="file" name="pic" id="test20">
-						<div class="layui-upload-list">
-							<img class="layui-upload-img" width="150" height="150" id="demo1" src="<?=$info->logo?>">
-							<p id="demoText"></p>
-							<input type="hidden" name="logo" value="<?=$info->logo?>" id="simg">
-						</div>
-					</div>
-                        <!-- <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                        <span class="input-group-append">
-                          <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                        </span> -->
+                      <input type="file" name="pic" id="test20">
+                      <div class="layui-upload-list">
+                        <img class="layui-upload-img" width="150" height="150" id="demo1" src="<?=$info->logo?>">
+                        <p id="demoText"></p>
+                        <input type="hidden" name="logo" value="<?=$info->logo?>" id="simg">
                       </div>
                     </div>
+                        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                        <span class="input-group-append">
+                          <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                        </span>
+                      </div>
+                    </div> -->
                    
                    
                     <button type="submit" class="btn btn-primary mr-2"  lay-filter="add" lay-submit="">Submit</button>
@@ -169,13 +213,13 @@
                   //location.href='/main'
                   //layer.alert(data.msg,{icon: 5});
                   //$("#res").click();//调用重置按钮将表单数据清空
-
-            	  layer.alert("操作成功", {icon: 6},function () {
-                      // 获得frame索引
-                      var index = parent.layer.getFrameIndex(window.name);
-                      //关闭当前frame
-                      parent.layer.close(index);
-                  });
+                  layer.alert("操作成功", {icon: 6});
+            	  // layer.alert("操作成功", {icon: 6},function () {
+                //       // 获得frame索引
+                //       var index = parent.layer.getFrameIndex(window.name);
+                //       //关闭当前frame
+                //       parent.layer.close(index);
+                //   });
               }else{
                    layer.alert(data.status,{icon: 5});
               }

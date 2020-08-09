@@ -59,7 +59,7 @@ class Member extends CI_Controller {
 	
 	public function edit()
 	{
-		$data['info'] = $this->pclass_model->getinfo();
+		$data['info'] = $this->member_model->getinfo();
 		$this->load->view($this->path.'/edit',$data);
 	}
 	public function update()
@@ -75,8 +75,9 @@ class Member extends CI_Controller {
 	}
 	public function cpass()
 	{
-
-		$this->load->view($this->path.'/password');
+		$data['info'] = $this->member_model->getinfo();
+		
+		$this->load->view($this->path.'/password',$data);
 	}
 	public function uppass()
 	{

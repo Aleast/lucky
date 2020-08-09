@@ -1,111 +1,156 @@
-<html class="x-admin-sm">
-  <head>
-    <meta charset="UTF-8">
-    <title>欢迎页面</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-    <link rel="stylesheet" href="/static/css/font.css">
-    <link rel="stylesheet" href="/static/css/xadmin.css">
-    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="/static/vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/static/vendors/base/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <link rel="stylesheet" href="/static/css/xadmin.css">
+
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/static/css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="/static/images/favicon.png" />
+  
+  <script type="text/javascript" src="/static/js/jquery.min.js"></script>
     <script type="text/javascript" src="/static/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/static/js/xadmin.js"></script>
     <script type="text/javascript" src="/static/js/cookie.js"></script>
-    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-    <!--[if lt IE 9]>
-      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  
-  <body>
-    <div class="x-nav">
-      <span class="layui-breadcrumb">
-        <a>
-          <cite>类别管理</cite></a>
-      </span>
-      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
-    </div>
-    <div class="x-body">
-        <!--<div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-         <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
-          <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
-          <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-        </form>
-      </div> -->
-      <xblock>
-<!--        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
-        <button class="layui-btn" onclick="x_admin_show('添加','/message/add',600,400)"><i class="layui-icon"></i>添加</button>
-       <!-- <span class="x-right" style="line-height:40px">共有数据：88 条</span>  -->
-      </xblock>
-      <table class="layui-table x-admin">
-        <thead>
-          <tr>
-<!--            <th>-->
-<!--              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>-->
-<!--            </th>-->
-            <th>ID</th>
-            <th>标题</th>
-            <th>内容</th>
-            <th>用户</th>
-            <th>时间</th>
-            <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
+</head>
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:/static/partials/_navbar.html -->
+    <?php @$this->load->view("top");?>
 
 
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:/static/partials/_sidebar.html -->
+      <?php @$this->load->view("left");?>
 
-		<?php foreach ($list as $item): ?>
-
-          <tr>
-<!--            <td>-->
-<!--              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='--><?//=$item['id']?><!--'><i class="layui-icon">&#xe605;</i></div>-->
-<!--            </td>-->
-            <td><?= @$i=$i+1 ?></td>
-            <td><?=$item['name']?></td>
-            <td><?=$item['content']?></td>
-            <td><?=$item['tonickName']?>-<?=$item['nickName']?></td>
-            <td><?=$item['addtime']?></td>
-            <td class="td-manage">
+      <!-- partial -->
+      <div class="main-panel">
+      <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-12 grid-margin">
+              <div class="d-flex justify-content-between flex-wrap">
+                <div class="d-flex align-items-end flex-wrap">
+                  <div class="d-flex">
+                    <i class="mdi mdi-home text-muted hover-cursor"></i>
+                    <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;系统设置&nbsp;/&nbsp;</p>
+                    <p class="text-primary mb-0 hover-cursor">消息列表</p>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-end flex-wrap">
+                  <!-- <button type="button" class="btn btn-light bg-white btn-icon mr-3 d-none d-md-block ">
+                    <i class="mdi mdi-download text-muted"></i>
+                  </button>
+                  <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
+                    <i class="mdi mdi-clock-outline text-muted"></i>
+                  </button> -->
+                  <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0" onclick="x_admin_show('添加','/message/add',600,400)">
+                    <i class="mdi mdi-plus text-muted"></i>
+                  </button>
+                  <!-- <button class="btn btn-primary mt-2 mt-xl-0">Download report</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+      
+      <div class="row">
             
+      <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">消息列表</h4>
+                  <!-- <p class="card-description">
+                    Add class <code>.table</code>
+                  </p> -->
+                
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                        <th>ID</th>
+                        <th>标题</th>
+                        <th>内容</th>
+                        <th>用户</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                      <?php foreach ($list as $item): ?>
+                        <tr>
+                          <td><?= @$i=$i+1 ?></td>
+                          <td><?=$item['name']?></td>
+                          <td><?=$item['content']?></td>
+                          <td><?=$item['tonickName']?>-<?=$item['nickName']?></td>
+                          <td><?=$item['addtime']?></td>
+                          <td class="td-manage">
+                          
+                          
 
 
-				<span onclick="x_admin_show('编辑','/message/edit?id=<?=$item['id']?>',600,400)" class="layui-btn layui-btn-normal layui-btn-mini" >
-					编辑</span>
+                        
+                            <label class="badge badge-info" onclick="x_admin_show('编辑','/message/edit?id=<?=$item['id']?>',600,400)">编辑</label>
 
 
-
-				<button type="button" onclick="member_del(this,<?=$item['id']?>)" class="layui-btn layui-btn-sm layui-btn-normal" ><i class="layui-icon"></i> 删除</button>
-
+                            <label class="badge badge-warning" onclick="member_del(this,<?=$item['id']?>)">删除</label>
 
 
+                          </td>
+                        </tr>
+ <?php endforeach;?>           
+                        
+                      </tbody>
+                    </table>
+                    <div id="pages"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+
+          
 
 
-			</td>
-          </tr>
-
-
- <?php endforeach;?>
-
-     
-        </tbody>
-      </table>
-    <!--   <div class="page">
-        <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
-        </div>
-      </div>-->
-      <div id="pages"></div>
+                       
+        <!-- content-wrapper ends -->
+        <!-- partial:/static/partials/_footer.html -->
+        <?php @$this->load->view("footer");?>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
     </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  
+
+    <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="/static/vendors/base/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- inject:js -->
+  <script src="/static/js/off-canvas.js"></script>
+  <script src="/static/js/hoverable-collapse.js"></script>
+  <script src="/static/js/template.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="/static/js/file-upload.js"></script>
+  <!-- End custom js for this page-->
+</body>
+
 
 <script>
  
@@ -139,8 +184,6 @@
 });
 });
 </script>
-
-
     <script>
       layui.use('laydate', function(){
         var laydate = layui.laydate;
@@ -157,12 +200,15 @@
       });
 
        /*用户-停用*/
-      function member_stop(obj,id){
-          layer.confirm('确认要停用吗？',function(index){
-              
-        	  strObj={"list":id}
+      function stop(obj,id){
+          layer.confirm('确认要操作吗？',function(index){
+
+			  //var strObj = eval("(" + {"id":id} + ")");
+			  var strObj={"id":id}
+
+			  console.log(strObj);
         	  $.ajax({
-                  url:"/message/setuse",
+                  url:"/member/setuse",
                   type:'get',//method请求方式，get或者post
                   dataType:'json',//预期服务器返回的数据类型
                   data:strObj,//表格数据序列化
@@ -193,6 +239,7 @@
                   }
               },
               error:function(){
+
                   layer.alert('操作失败！！！',{icon:5});
               }
        });
@@ -214,7 +261,7 @@
         	  strObj={"dellist":id}
               //发异步删除数据
                  $.ajax({
-                        url:"/message/delall",
+                        url:"/member/delall",
                         type:'get',//method请求方式，get或者post
                         dataType:'json',//预期服务器返回的数据类型
                         data:strObj,//表格数据序列化
@@ -250,7 +297,7 @@
             //捉到所有被选中的，发异步进行删除
             
              $.ajax({
-                        url:"/message/delall",
+                        url:"/member/delall",
                         type:'get',//method请求方式，get或者post
                         dataType:'json',//预期服务器返回的数据类型
                         data:strObj,//表格数据序列化
@@ -280,7 +327,4 @@
         });
       }
     </script>
-  
-  </body>
-
 </html>

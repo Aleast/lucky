@@ -25,10 +25,10 @@
         <form class="layui-form">
           <div class="layui-form-item">
               <label for="L_username" class="layui-form-label">
-                  昵称
+                  用户名
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="L_username" name="username" disabled="" value="小明" class="layui-input">
+                  <input type="text" id="L_username" name="username" disabled="true" value="<?=$info->username?>" class="layui-input">
               </div>
           </div>
           <div class="layui-form-item">

@@ -24,23 +24,53 @@
     <div class="x-body">
         <form class="layui-form">
           <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red">*</span>发帖间隔
+              <label for="L_nickname" class="layui-form-label">
+                  <span class="x-red">*</span>昵称
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="L_interval" name="interval" required="" lay-verify="interval"
-                  autocomplete="off" class="layui-input" value='<?=$info->interval?>' >
+                  <input type="text" id="L_nickname" name="nickName" required=""
+                  autocomplete="off" class="layui-input" value='<?=$info->nickName?>' >
               </div>
-
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>可以是中英文
+              </div>
           </div>
-
-
           <div class="layui-form-item">
-			  <input type="hidden" name="id" value="<?=$info->id?>">
+              <label for="L_username" class="layui-form-label">
+                  <span class="x-red">*</span>手机
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_phone" name="phone" required="" lay-verify="phone"
+                  autocomplete="off" class="layui-input" value='<?=$info->phone?>'>
+              </div>
+          </div>
+          <!-- 
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                  <span class="x-red">*</span>密码
+              </label>
+              <div class="layui-input-inline">
+                  <input type="password" id="L_pass" name="pass" required="" lay-verify="pass"
+                  autocomplete="off" class="layui-input">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  6到16个字符
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+                  <span class="x-red">*</span>确认密码
+              </label>
+              <div class="layui-input-inline">
+                  <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
+                  autocomplete="off" class="layui-input">
+              </div>
+          </div>-->
+          <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
               <button  class="layui-btn" lay-filter="add" lay-submit="">
-                  设置
+                  增加
               </button>
           </div>
       </form>
@@ -70,13 +100,13 @@
 
         //监听提交
         form.on('submit(add)', function(data){
-
-			var param=JSON.stringify(data.field);
-
+         
+          data.field.id=<?=$_REQUEST['id']?>;
+          var param=JSON.stringify(data.field);
           console.log(param);
           var strObj = eval("(" + param + ")");
           $.ajax({
-              url:"/wxuser/update",
+              url:"/user/update",
               type:'get',//method请求方式，get或者post
               dataType:'json',//预期服务器返回的数据类型
               data:strObj,//表格数据序列化

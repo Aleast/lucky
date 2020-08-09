@@ -1,5 +1,5 @@
 <?php
-class Wxuser_model extends CI_Model {
+class User_model extends CI_Model {
 
 	public $table = 'wxuser';
 	public $id;
