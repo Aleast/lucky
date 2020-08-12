@@ -1,8 +1,8 @@
 <?php
 
-class Rl_model extends CI_Model
+class Dept_model extends CI_Model
 {
-    public $table = 'rl';
+    public $table = 'dept';
     public $id;
     public $name;
     public $price;
@@ -41,12 +41,9 @@ class Rl_model extends CI_Model
 
         $addtime=time();
                 $data = array(
-                    'cphone'=>$insertdata['cphone'],
-                    'mid'=>$insertdata['mid'],
-                    'cid' => $insertdata['cid'],
+                    'name'=>$this->input->post_get('name', true),
+                    'pid'=>$this->input->post_get('pid', true),
                     'addtime' => $addtime
-                    
-                    
                 );
       
             $this->db->replace($this->table, $data);
@@ -69,11 +66,9 @@ class Rl_model extends CI_Model
     public function update()
     {
         $data = array(
-            'cid' => $this->input->post_get('cid', true),
-            'cphone' => $this->input->post_get('cphone', true),
-            'mid'=>$this->input->post_get('mid', true),
-            'addtime'=>$this->input->post_get('addtime', true),
-            'mname'=>$this->input->post_get('mname', true)
+            'name'=>$this->input->post_get('name', true),
+            'pid'=>$this->input->post_get('pid', true),
+            'addtime' => $addtime
         );
 
         $id = $this->input->post_get('id', true);

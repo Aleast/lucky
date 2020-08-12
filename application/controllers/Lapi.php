@@ -1,9 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+header("Access-Control-Allow-Origin:*"); 
+
 
 use chriskacerguis\RestServer\RestController;
 
-class LApi extends RestController {
+class Lapi extends RestController {
 
     function __construct()
     {
@@ -16,10 +18,16 @@ class LApi extends RestController {
 
 	public function addrl_post()
 	{
+ 
+
+	//$this->output->set_header("Access-Control-Allow-Origin: * ");
+
+		$insertdata=$this->_post_args;
+
+//		var_dump($insertdata);
 //		$start=$this->get('start');
 //		$end=$this->get('end');
 		$insertdata=$this->_post_args;
-
 		$res= $this->rl_model->add($insertdata);
 		// Check if the users data store contains users
 		if ( $res )
@@ -29,6 +37,7 @@ class LApi extends RestController {
 		}
 		else
 		{
+			
 			// Set the response and exit
 			$this->response(['status' => false,'message' => 'No Info were found'],404);
 		}
