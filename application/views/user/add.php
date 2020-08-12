@@ -23,19 +23,52 @@
   <body>
     <div class="x-body">
         <form class="layui-form">
+            <div class="layui-form-item">
+                <label for="L_phone" class="layui-form-label">
+                    <span class="x-red">*</span>电话
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_phone" name="phone" required="" lay-verify="phone"
+                    autocomplete="off" class="layui-input">
+                </div>
+            </div>
         
+            <div class="layui-form-item">
+                <label for="L_cid" class="layui-form-label">
+                    <span class="x-red">*</span>商城ID
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_cid" name="cid" required="" lay-verify="cid"
+                    autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>请输入客户在商城系统内的ID，可为空
+              </div>
+             
+            </div>  
           <div class="layui-form-item">
-              <label for="L_username" class="layui-form-label">
-                  <span class="x-red">*</span>用户名
+              <label for="L_mid" class="layui-form-label">
+                  <span class="x-red">*</span>归属员工
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
-                  autocomplete="off" class="layui-input">
+                  <!-- <input type="text" id="L_mid" name="mid" required="" lay-verify="mid"
+                  autocomplete="off" class="layui-input"> -->
+
+                  <select name="mid" id="L_mid" lay-verify="required" class="layui-input">
+                        <option value="">请选择客户归属</option>
+                        
+                        <?php foreach ($mids as $item): ?>
+                        <option value="<?=$item['id']?>"><?=$item['username']?></option>
+                        <?php endforeach;?>  
+                      
+                  </select>
+
               </div>
+              
              
           </div>
          
-           <div class="layui-form-item">
+           <!-- <div class="layui-form-item">
               <label for="L_email" class="layui-form-label">
                   <span class="x-red">*</span>邮箱
               </label>
@@ -47,15 +80,7 @@
                   <span class="x-red">*</span>将会成为您唯一的登入名
               </div>
           </div>
-          <div class="layui-form-item">
-              <label for="L_phone" class="layui-form-label">
-                  <span class="x-red">*</span>电话
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_phone" name="phone" required="" lay-verify="phone"
-                  autocomplete="off" class="layui-input">
-              </div>
-          </div>
+          
           <div class="layui-form-item">
               <label for="L_pass" class="layui-form-label">
                   <span class="x-red">*</span>密码
@@ -76,7 +101,7 @@
                   <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
                   autocomplete="off" class="layui-input">
               </div>
-          </div>
+          </div> -->
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
@@ -116,7 +141,7 @@
               
 
         	  $.ajax({
-                  url:"/member/addone",
+                  url:"/user/addone",
                   type:'get',//method请求方式，get或者post
                   dataType:'json',//预期服务器返回的数据类型
                   data:strObj,//表格数据序列化

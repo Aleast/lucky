@@ -44,7 +44,7 @@
                 <div class="d-flex align-items-end flex-wrap">
                   <div class="d-flex">
                     <i class="mdi mdi-home text-muted hover-cursor"></i>
-                    <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;系统管理&nbsp;/&nbsp;</p>
+                    <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;客户管理&nbsp;/&nbsp;</p>
                     <p class="text-primary mb-0 hover-cursor">客户信息</p>
                   </div>
                 </div>
@@ -77,8 +77,10 @@
                       <thead>
                         <tr>
                           <th>ID</th>
-                          <th>昵称</th>
+                          <!-- <th>昵称</th> -->
                           <th>电话</th>
+                          <th>商城ID</th>
+                          <th>归属员工</th>
                           <th>时间</th>
                           <th>操作</th>
                         </tr>
@@ -88,8 +90,12 @@
                       <?php foreach ($list as $item): ?>
                         <tr>
                           <td><?= @$i=$i+1 ?></td>
-                          <td><?=$item['nickName']?></td>
+                          <!-- <td><?=$item['nickName']?></td> -->
                           <td><?=$item['phone']?></td>
+                          <td><?=$item['cid']?></td>
+                          <td><?=$item['username']?></td>
+
+
                           <td><?=$item['addtime']?></td>
                          
                           <td> <?php if ($item['is_use'] === '0'): ?>

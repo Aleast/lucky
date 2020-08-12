@@ -82,7 +82,9 @@
                           <th>用户名</th>
                           <th>邮箱</th>
                           <th>加入时间</th>
+                          <th>注册链接</th>
                           <th>状态</th>
+                          
                           <th>操作</th>
                         </tr>
                       </thead>
@@ -94,7 +96,9 @@
                           <td><?=$item['username']?></td>
                           <td><?=$item['email']?></td>
                           <td> <?=$item['addtime']?></td>
-                         
+                          <td> https://www.lucky-shop.in/?/mobile/user/register&invite_code=<?=$item['id']?></td>
+
+                          
                           <td> <?php if ($item['is_use'] === '0'): ?>
 
                             <label class="badge badge-danger" onclick="stop(this,<?=$item['id']?>)">停用</label>

@@ -17,8 +17,8 @@ class Lapi extends RestController {
 
 
 	public function addrl_post()
-	{
- 
+
+	{ 
 
 	//$this->output->set_header("Access-Control-Allow-Origin: * ");
 

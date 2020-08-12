@@ -54,9 +54,13 @@ class User_model extends CI_Model {
         }else{
             $this->db->limit($limit,$limit*($pages-1));
         }
+		$this->db->select('wxuser.*,rl.cid,rl.mid,user.username');
+		$this->db->where('wxuser.is_del', "0");//0没有删除
+		$this->db->order_by('wxuser.id desc');//0没有删除
+		$this->db->join('rl', 'phone = rl.cphone','left');
+		$this->db->join('user', 'rl.mid = user.id','left');
 
-		$this->db->where('is_del', "0");//0没有删除
-		$this->db->order_by('id desc');//0没有删除
+
 		$query = $this->db->get($this->table);
 		return $query->result_array();
 
@@ -68,13 +72,14 @@ class User_model extends CI_Model {
 	{
 
 		$data = array(
-			'nickName' => $this->input->post_get('nickName', true),
-			'avatarUrl' => $this->input->post_get('avatarUrl', true),
-			'gender' => $this->input->post_get('gender', true),
-			'province' => $this->input->post_get('province', true),
-			'city' => $this->input->post_get('city', true),
-			'country' => $this->input->post_get('country', true),
-			'openid' => $this->input->post_get('openid', true),
+			// 'nickName' => $this->input->post_get('nickName', true),
+			// 'avatarUrl' => $this->input->post_get('avatarUrl', true),
+			// 'gender' => $this->input->post_get('gender', true),
+			// 'province' => $this->input->post_get('province', true),
+			// 'city' => $this->input->post_get('city', true),
+			// 'country' => $this->input->post_get('country', true),
+			// 'openid' => $this->input->post_get('openid', true),
+			'phone' => $this->input->post_get('phone', true),
 
 		);
 
