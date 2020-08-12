@@ -23,7 +23,59 @@
   <body>
     <div class="x-body">
         <form class="layui-form">
+        <div class="layui-form-item">
+                <label for="L_phone" class="layui-form-label">
+                    <span class="x-red">*</span>电话
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_phone" name="phone" required="" lay-verify="phone"
+                    autocomplete="off" class="layui-input" value='<?=$info->phone?>'>
+                </div>
+            </div>
+        
+            <div class="layui-form-item">
+                <label for="L_cid" class="layui-form-label">
+                    <span class="x-red">*</span>商城ID
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_cid" name="cid" required="" lay-verify="cid"
+                    autocomplete="off" class="layui-input" value='<?=$rl->cid?>'>
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>请输入客户在商城系统内的ID，可为空
+              </div>
+             
+            </div>  
           <div class="layui-form-item">
+              <label for="L_mid" class="layui-form-label">
+                  <span class="x-red">*</span>归属员工
+              </label>
+              <div class="layui-input-inline">
+                  <!-- <input type="text" id="L_mid" name="mid" required="" lay-verify="mid"
+                  autocomplete="off" class="layui-input"> -->
+
+                  <select name="mid" id="L_mid" lay-verify="required" class="layui-input">
+                        <option value="">请选择客户归属</option>
+                        
+                        <?php foreach ($mids as $item): ?>
+                        <option value="<?=$item['id']?>" 
+                        <?php if ($item['id'] === $rl->mid): ?>
+                            selected
+                         <?php endif; ?>
+                        ><?=$item['username']?></option>
+                        <?php endforeach;?>  
+                      
+                  </select>
+
+              </div>
+              
+             
+          </div>
+
+
+
+
+          <!-- <div class="layui-form-item">
               <label for="L_nickname" class="layui-form-label">
                   <span class="x-red">*</span>昵称
               </label>
@@ -43,7 +95,7 @@
                   <input type="text" id="L_phone" name="phone" required="" lay-verify="phone"
                   autocomplete="off" class="layui-input" value='<?=$info->phone?>'>
               </div>
-          </div>
+          </div> -->
           <!-- 
           <div class="layui-form-item">
               <label for="L_pass" class="layui-form-label">
@@ -70,7 +122,7 @@
               <label for="L_repass" class="layui-form-label">
               </label>
               <button  class="layui-btn" lay-filter="add" lay-submit="">
-                  增加
+                  修改
               </button>
           </div>
       </form>

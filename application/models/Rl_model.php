@@ -49,6 +49,21 @@ class Rl_model extends CI_Model
             return $this->db->affected_rows();;
     } 
 
+    public function add_rl()
+    {
+
+        $data = array(
+            'cid' =>  $this->input->post_get('cid', TRUE),
+            'mid' => $this->input->post_get('mid', TRUE),
+            'cphone' => $this->input->post_get('phone', TRUE),
+        );
+
+        $this->db->replace($this->table, $data);
+       
+        return $this->db->affected_rows();;
+        
+    }
+
     public function del()
     {
         $delllist = $this->input->post_get('dellist', true);
@@ -80,6 +95,26 @@ class Rl_model extends CI_Model
         return $this->db->affected_rows();
 
     }
+
+    public function update_rl()
+    {
+        $data = array(
+
+            'cid' =>  $this->input->post_get('cid', TRUE),
+            'mid' => $this->input->post_get('mid', TRUE),
+            'cphone' => $this->input->post_get('phone', TRUE),
+        );
+
+        $cphone = $this->input->post_get('phone', true);
+
+        $this->db->where('cphone', $cphone);
+        $this->db->update($this->table, $data);
+
+        return $this->db->affected_rows();
+
+    }
+
+
     public function getinfo()
     {
         $this->id = $this->input->post_get('id', true);// please read the below note
@@ -104,6 +139,15 @@ class Rl_model extends CI_Model
     {
         $this->id = $this->input->post_get('id', true);// please read the below note
         $this->db->where('id', $this->id);
+        $query = $this->db->get($this->table);
+        return $query->row();
+
+    }
+
+    public function get_info($cphone)
+    {
+        
+        $this->db->where('cphone', $cphone);
         $query = $this->db->get($this->table);
         return $query->row();
 

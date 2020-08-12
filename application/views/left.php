@@ -9,17 +9,33 @@
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
           <i class="mdi mdi-circle-outline menu-icon"></i>
-          <span class="menu-title">系统管理</span>
+          <span class="menu-title">客户管理</span>
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-basic">
           <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="/user?pages=1&limit=10">客户信息</a></li>
-            <li class="nav-item"> <a class="nav-link" href="/member?pages=1&limit=10">管理员信息</a></li>
+            <!-- <li class="nav-item"> <a class="nav-link" href="/member?pages=1&limit=10">管理员信息</a></li> -->
           
           </ul>
         </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+          <i class="mdi mdi-circle-outline menu-icon"></i>
+          <span class="menu-title">系统管理</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-basic">
+          <ul class="nav flex-column sub-menu">
+          <!-- <li class="nav-item"> <a class="nav-link" href="/user?pages=1&limit=10">客户信息</a></li> -->
+            <li class="nav-item"> <a class="nav-link" href="/member?pages=1&limit=10">管理员信息</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/member?pages=1&limit=10">部门管理</a></li>
+          
+          </ul>
+        </div>
+      </li>
+      
       <!-- <li class="nav-item">
         <a class="nav-link" href="/wxuser?pages=1&limit=10">
           <i class="mdi mdi-view-headline menu-icon"></i>

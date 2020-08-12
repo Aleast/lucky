@@ -8,6 +8,9 @@ class User extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('user_model');
+		$this->load->model('member_model');
+        $this->load->model('rl_model');
+		
         $this->load->helper('url_helper');
     }
 
@@ -21,14 +24,18 @@ class User extends CI_Controller {
 
 	public function add()
 	{
-
-		$this->load->view($this->path.'/add');
+		$data['mids'] = $this->member_model->get_user();
+		// var_dump($mids);exit;
+		$this->load->view($this->path.'/add',$data);
 	}
 	public function addone()
 	{
 	    
-	    if($this->user_model->add_user()>0){
-	        $data['status']="true";
+	    if($this->user_model->add()>0 && $this->rl_model->add_rl()>0){
+		
+			$data['status']="true";
+			
+	        
 	    }else{
 	        $data['status']="添加失败";
 	    }
@@ -49,13 +56,17 @@ class User extends CI_Controller {
 	public function edit()
 	{
 		$data['info'] = $this->user_model->getinfo();
+		// var_dump($data['info']->phone);exit;
+		$data['mids'] = $this->member_model->get_user();
+		$data['rl']  = $this->rl_model->get_info($data['info']->phone);
+		// var_dump($data);exit;
 		$this->load->view($this->path.'/edit',$data);
 	}
 
 	public function update()
 	{
 
-		if($this->user_model->update()>0){
+		if($this->user_model->update()>0 && $this->rl_model->update_rl()>0){
 			$data['status']="true";
 		}else{
 			$data['status']="操作失败";
