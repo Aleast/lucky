@@ -7,12 +7,12 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+        <a class="nav-link" data-toggle="collapse" href="#ui-rl" aria-expanded="false" aria-controls="ui-rl">
           <i class="mdi mdi-circle-outline menu-icon"></i>
           <span class="menu-title">客户管理</span>
           <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="ui-basic">
+        <div class="collapse" id="ui-rl">
           <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="/rl?pages=1&limit=10">客户信息</a></li>
             <!-- <li class="nav-item"> <a class="nav-link" href="/member?pages=1&limit=10">管理员信息</a></li> -->
