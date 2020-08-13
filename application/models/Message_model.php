@@ -1,6 +1,7 @@
 <?php
+require_once 'Base_model.php';
 
-class Message_model extends CI_Model
+class Message_model extends Base_model
 {
     public $table = 'message';
     public $id;
@@ -9,6 +10,7 @@ class Message_model extends CI_Model
 
     public function __construct()
     {
+        parent::__construct();
         $this->load->database();
     }
 

@@ -70,7 +70,7 @@ class Login extends Base {
 		$this->session->unset_userdata('is_manager');
 		$this->session->unset_userdata('deptid');
 		// session_destroy();
-		redirect("http://39.105.156.161/login");
+		redirect($this->config->item("base_url").'login');
 		// return redirect()->to('/login');
 		// return redirect()->back();
 	}

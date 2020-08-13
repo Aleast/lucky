@@ -1,11 +1,14 @@
 <?php
-class Manager_model extends CI_Model {
+require_once 'Base_model.php';
+
+class Manager_model extends Base_model {
 
 	public $table='manager';
 	public $username;
     public $password;
      public function __construct()
     {
+        parent::__construct();
         $this->load->database();
     }
 
@@ -13,6 +16,9 @@ class Manager_model extends CI_Model {
     {
 
         $this->db->where('is_del', "0");//0没有删除
+        if(!empty($this->datascope)){
+            $this->db->where_in('id', $this->datascope);//数据范围
+        }
         return $this->db->count_all_results($this->table);
         
     }
@@ -37,6 +43,9 @@ class Manager_model extends CI_Model {
         }
         
         $this->db->where('is_del', "0");//0没有删除
+        if(!empty($this->datascope)){
+            $this->db->where_in('id', $this->datascope);//数据范围
+        }
         $query = $this->db->get($this->table);
 
         return $query->result_array();
@@ -62,6 +71,9 @@ class Manager_model extends CI_Model {
         $delllist=$this->input->post_get('dellist', TRUE);
        
         $this->db->set('is_del', '1');
+        if(!empty($this->datascope)){
+            $this->db->where_in('id', $this->datascope);//数据范围
+        }
         $this->db->where_in('id', $delllist);
         $this->db->update($this->table);
         
@@ -89,6 +101,9 @@ class Manager_model extends CI_Model {
         $id=$this->input->post_get('id', TRUE);
         
         $this->db->where('id', $id);
+        if(!empty($this->datascope)){
+            $this->db->where_in('id', $this->datascope);//数据范围
+        }
         $this->db->update($this->table,$data);
         
         return $this->db->affected_rows();;
@@ -109,6 +124,9 @@ class Manager_model extends CI_Model {
         $id=$this->input->post_get('id', TRUE);
         
         $this->db->where('id', $id);
+        if(!empty($this->datascope)){
+            $this->db->where_in('id', $this->datascope);//数据范围
+        }
         $this->db->update($this->table,$data);
         
         return $this->db->affected_rows();;
@@ -119,7 +137,10 @@ class Manager_model extends CI_Model {
 	public function getinfo()
 	{
 		$this->id  = $this->input->post_get('id', TRUE);// please read the below note
-		$this->db->where('id', $this->id);
+        $this->db->where('id', $this->id);
+        if(!empty($this->datascope)){
+            $this->db->where_in('id', $this->datascope);//数据范围
+        }
 		$query = $this->db->get($this->table);
 
 		return $query->row();
@@ -134,6 +155,7 @@ class Manager_model extends CI_Model {
        
         $this->db->where('username', $this->username);
         $this->db->where('password', $this->password);
+        
         $query = $this->db->get($this->table);
         
         Dlog_model::save( $this->db->last_query() );

@@ -18,6 +18,7 @@ class Rl extends Base {
 
 	public function index()
 	{	
+		// echo $this->config->item("base_url");exit;
 		// var_dump($this->session->get_userdata());exit;
 		$data['total_rows']=$this->rl_model->get_count();    //总的内容 条数
 

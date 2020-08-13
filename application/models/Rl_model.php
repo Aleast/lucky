@@ -1,5 +1,5 @@
 <?php
-require 'Base_model.php';
+require_once 'Base_model.php';
 
 class Rl_model extends Base_model
 {
@@ -7,7 +7,6 @@ class Rl_model extends Base_model
     public $id;
     public $name;
     public $price;
-    public $datascope=[];
 
     public function __construct()
     {   
@@ -34,6 +33,10 @@ class Rl_model extends Base_model
     {
 
         $this->db->where('is_del', "0");//0没有删除
+        if(!empty($this->datascope)){
+            $this->db->where_in('mid', $this->datascope);//数据范围
+        }
+        
         
         return $this->db->count_all_results($this->table);
 
@@ -67,8 +70,9 @@ class Rl_model extends Base_model
 		
 		$this->db->join('manager', 'rl.mid = manager.id','left');
 
-
-		$query = $this->db->get($this->table);
+       
+        $query = $this->db->get($this->table);
+        Dlog_model::save( $this->db->last_query() );
 		return $query->result_array();
 
     }
@@ -124,6 +128,9 @@ class Rl_model extends Base_model
 
         $this->db->set('is_del', '1');
         $this->db->where_in('id', $delllist);
+        if(!empty($this->datascope)){
+            $this->db->where_in('mid', $this->datascope);//数据范围
+        }
         $this->db->update($this->table);
         return $this->db->affected_rows();
     }
@@ -141,6 +148,9 @@ class Rl_model extends Base_model
         $id = $this->input->post_get('id', true);
 
         $this->db->where('id', $id);
+        if(!empty($this->datascope)){
+            $this->db->where_in('mid', $this->datascope);//数据范围
+        }
         $this->db->update($this->table, $data);
 
         return $this->db->affected_rows();
@@ -159,6 +169,9 @@ class Rl_model extends Base_model
         $id = $this->input->post_get('id', true);
         // var_dump($id);exit;
         $this->db->where('id', $id);
+        if(!empty($this->datascope)){
+            $this->db->where_in('mid', $this->datascope);//数据范围
+        }
         $this->db->update($this->table, $data);
 
         return $this->db->affected_rows();
@@ -170,6 +183,9 @@ class Rl_model extends Base_model
     {
         $this->id = $this->input->post_get('id', true);// please read the below note
         $this->db->where('id', $this->id);
+        if(!empty($this->datascope)){
+            $this->db->where_in('mid', $this->datascope);//数据范围
+        }
         $query = $this->db->get($this->table);
 
         return $query->row();
@@ -178,7 +194,10 @@ class Rl_model extends Base_model
 	public function getRlInfo($id)
 	{
 
-		$this->db->where('id', $id);
+        $this->db->where('id', $id);
+        if(!empty($this->datascope)){
+            $this->db->where_in('mid', $this->datascope);//数据范围
+        }
 		$query = $this->db->get($this->table);
 		return $query->row();
 
@@ -190,6 +209,9 @@ class Rl_model extends Base_model
     {
         $this->id = $this->input->post_get('id', true);// please read the below note
         $this->db->where('id', $this->id);
+        if(!empty($this->datascope)){
+            $this->db->where_in('mid', $this->datascope);//数据范围
+        }
         $query = $this->db->get($this->table);
         return $query->row();
 
@@ -199,6 +221,9 @@ class Rl_model extends Base_model
     {
         
         $this->db->where('cphone', $cphone);
+        if(!empty($this->datascope)){
+            $this->db->where_in('mid', $this->datascope);//数据范围
+        }
         $query = $this->db->get($this->table);
         return $query->row();
 

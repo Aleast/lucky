@@ -1,6 +1,7 @@
 <?php
+require_once 'Base_model.php';
 
-class Dept_model extends CI_Model
+class Dept_model extends Base_model
 {
     public $table = 'dept';
     public $id;
@@ -9,6 +10,7 @@ class Dept_model extends CI_Model
 
     public function __construct()
     {
+        parent::__construct();
         $this->load->database();
     }
 

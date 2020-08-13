@@ -16,7 +16,7 @@ class Base extends CI_Controller {
         //没有登陆回到登陆页面
         if(!isset($_SESSION['username'])&&$controller!="login")
         {
-            redirect("/login");
+            redirect($this->config->item("base_url")."login");
 
         }
 

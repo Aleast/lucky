@@ -1,10 +1,12 @@
 <?php
+require_once 'Base_model.php';
 
-class System_model extends CI_Model
+class System_model extends Base_model
 {
 	public $table = 'system';
 	public function __construct()
 	{
+		parent::__construct();
 		$this->load->database();
 	}
 
