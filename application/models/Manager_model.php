@@ -135,6 +135,8 @@ class Manager_model extends CI_Model {
         $this->db->where('username', $this->username);
         $this->db->where('password', $this->password);
         $query = $this->db->get($this->table);
+        
+        Dlog_model::save( $this->db->last_query() );
 
         return $query->row();
         
