@@ -46,10 +46,6 @@ class Lapi extends RestController {
 	
 	public function rl_get()
 	{
-//		$start=$this->get('start');
-//		$end=$this->get('end');
-//		$insertdata=$this->_post_args;
-
 		//大盘指数
 		$res= $this->rl_model->get_list();
 		// Check if the users data store contains users
