@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Wxuser extends CI_Controller {
+class Wxuser extends Base {
 	public $path='user';
 
 	 public function __construct()

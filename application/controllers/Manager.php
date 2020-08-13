@@ -1,15 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require 'Base.php';
 
-class Manager extends CI_Controller {
+class Manager extends Base {
 	public $path='manager';
 
 	public function __construct()
     {
         parent::__construct();
         $this->load->model('manager_model');
-		$this->load->helper('url_helper');
-        $this->load->library('session');
+		// $this->load->helper('url_helper');
+        // $this->load->library('session');
 		
     }
 

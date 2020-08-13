@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require 'Base.php';
 
-class Login extends CI_Controller {
+class Login extends Base {
 	/**
 	 * Index Page for this controller.
 	 *
@@ -21,8 +22,8 @@ class Login extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('manager_model');
-        $this->load->helper('url_helper');
-        $this->load->library('session');
+        // $this->load->helper('url_helper');
+        // $this->load->library('session');
 
     }
 

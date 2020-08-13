@@ -10,8 +10,11 @@ class Base extends CI_Controller {
         
         $this->load->library('session');
         
+        $controller = $this->router->class;
+        $action = $this->router->method;
+        // echo $controller.$action;exit;
         //没有登陆回到登陆页面
-        if(!isset($_SESSION['username']))
+        if(!isset($_SESSION['username'])&&$controller!="login")
         {
             redirect("/login");
 

@@ -1,15 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Message extends CI_Controller {
+require 'Base.php';
+class Message extends Base {
 
     public $path='message';
 	public function __construct()
     {
         parent::__construct();
         $this->load->model('message_model');
-		$this->load->helper('url_helper');
-        $this->load->library('session');
+		// $this->load->helper('url_helper');
+        // $this->load->library('session');
 		
     }
 

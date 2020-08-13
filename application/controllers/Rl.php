@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require 'Base.php';
 
 class Rl extends Base {
 	public $path='rl';
@@ -11,8 +12,8 @@ class Rl extends Base {
 		$this->load->model('manager_model');
         $this->load->model('rl_model');
 		
-        $this->load->library('session');
-        $this->load->helper('url_helper');
+        // $this->load->library('session');
+        // $this->load->helper('url_helper');
     }
 
 	public function index()

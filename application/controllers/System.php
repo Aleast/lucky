@@ -1,15 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-class System extends CI_Controller {
+require 'Base.php';
+class System extends Base {
 	public $path='system';
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('system_model');
-		$this->load->helper('url_helper');
-        $this->load->library('session');
+		// $this->load->helper('url_helper');
+        // $this->load->library('session');
 
 	}
 

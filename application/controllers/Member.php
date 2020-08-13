@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Member extends CI_Controller {
+require 'Base.php';
+class Member extends Base {
 	public $path='member';
 
 	public function __construct()
     {
         parent::__construct();
         $this->load->model('member_model');
-        $this->load->helper('url_helper');
+        // $this->load->helper('url_helper');
     }
 
 	public function index()

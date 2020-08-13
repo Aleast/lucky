@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require 'Base.php';
 
-class Welcome extends CI_Controller {
+class Welcome extends Base {
     public function __construct()
     {
         parent::__construct();
@@ -12,8 +13,8 @@ class Welcome extends CI_Controller {
         $this->load->model('message_model');
         $this->load->model('quotes_model');
         
-        $this->load->helper('url_helper');
-        $this->load->library('session');
+        // $this->load->helper('url_helper');
+        // $this->load->library('session');
         
         //没有登陆回到登陆页面
         if(!isset($_SESSION['username']))

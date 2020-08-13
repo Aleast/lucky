@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Addchu extends CI_Controller {
+class Addchu extends Base {
 
     public $path='addchu';
 	public function __construct()
