@@ -10,7 +10,6 @@ class User extends Base {
         $this->load->model('user_model');
 		$this->load->model('member_model');
         $this->load->model('rl_model');
-		
         $this->load->helper('url_helper');
     }
 
