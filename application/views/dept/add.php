@@ -23,29 +23,28 @@
   <body>
     <div class="x-body">
         <form class="layui-form">
+            <div class="layui-form-item">
+                <label for="L_name" class="layui-form-label">
+                    <span class="x-red">*</span>部门名称
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_name" name="name" required="" lay-verify="name"
+                    autocomplete="off" class="layui-input">
+                </div>
+            </div>
         
           <div class="layui-form-item">
-              <label for="L_username" class="layui-form-label">
-                  <span class="x-red">*</span>用户名
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
-                  autocomplete="off" class="layui-input">
-              </div>
-             
-          </div>
-          <div class="layui-form-item">
-              <label for="L_deptid" class="layui-form-label">
-                  <span class="x-red">*</span>所属部门
+              <label for="L_pid" class="layui-form-label">
+                  <span class="x-red">*</span>上级部门
               </label>
               <div class="layui-input-inline">
                   <!-- <input type="text" id="L_mid" name="mid" required="" lay-verify="mid"
                   autocomplete="off" class="layui-input"> -->
 
-                  <select name="deptid" id="L_deptid" lay-verify="required" class="layui-input">
-                        <option value="">请选择所属部门</option>
+                  <select name="pid" id="L_pid" lay-verify="required" class="layui-input">
+                        <option value="">请选择上级部门</option>
                         
-                        <?php foreach ($deptids as $item): ?>
+                        <?php foreach ($pids as $item): ?>
                         <option value="<?=$item['id']?>"><?php echo str_repeat('---',$item['level'])?><?=$item['name']?></option>
                         <?php endforeach;?>  
                       
@@ -54,19 +53,6 @@
               </div>
               
              
-          </div>
-
-          <div class="layui-form-item">
-              <label for="L_is_manager" class="layui-form-label">
-                  <span class="x-red">*</span>是否部门管理员
-              </label>
-              <!-- <div class="layui-input-inline">
-                  <input type="text" id="L_is_manager" name="is_manager" required="" lay-verify="is_manager"
-                  autocomplete="off" class="layui-input">
-              </div> -->
-              <div class="layui-input-inline">
-                <input type="checkbox" name="is_manager" value=1 lay-skin="switch" lay-text="是|否" class="layui-input">
-              </div>
           </div>
          
            <!-- <div class="layui-form-item">
@@ -80,16 +66,8 @@
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red">*</span>将会成为您唯一的登入名
               </div>
-          </div> -->
-          <!-- <div class="layui-form-item">
-              <label for="L_phone" class="layui-form-label">
-                  <span class="x-red">*</span>电话
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_phone" name="phone" required="" lay-verify="phone"
-                  autocomplete="off" class="layui-input">
-              </div>
-          </div> -->
+          </div>
+          
           <div class="layui-form-item">
               <label for="L_pass" class="layui-form-label">
                   <span class="x-red">*</span>密码
@@ -110,7 +88,7 @@
                   <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
                   autocomplete="off" class="layui-input">
               </div>
-          </div>
+          </div> -->
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
@@ -150,7 +128,7 @@
               
 
         	  $.ajax({
-                  url:"/manager/addone",
+                  url:"/dept/addone",
                   type:'get',//method请求方式，get或者post
                   dataType:'json',//预期服务器返回的数据类型
                   data:strObj,//表格数据序列化

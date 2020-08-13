@@ -80,9 +80,11 @@
                         <tr>
                           <th>ID</th>
                           <th>用户名</th>
-                          <th>邮箱</th>
+                         
                           <th>加入时间</th>
                           <th>注册链接</th>
+                          <th>所属部门</th>
+                          <th>是否部门管理员</th>
                           <th>状态</th>
                           
                           <th>操作</th>
@@ -94,10 +96,11 @@
                         <tr>
                           <td><?=$item['id']?></td>
                           <td><?=$item['username']?></td>
-                          <td><?=$item['email']?></td>
+                         
                           <td> <?=$item['addtime']?></td>
                           <td> https://www.lucky-shop.in/?/mobile/user/register&invite_code=<?=$item['id']?></td>
-
+                          <td><?=$item['deptname']?></td>
+                          <td><?php if ($item['is_manager'] === '1'): ?>是<?php else: ?>否<?php endif; ?></td>
                           
                           <td> <?php if ($item['is_use'] === '0'): ?>
 

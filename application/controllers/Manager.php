@@ -8,7 +8,9 @@ class Manager extends Base {
 	public function __construct()
     {
         parent::__construct();
-        $this->load->model('manager_model');
+		$this->load->model('manager_model');
+        $this->load->model('dept_model');
+		
 		// $this->load->helper('url_helper');
         // $this->load->library('session');
 		
@@ -23,15 +25,18 @@ class Manager extends Base {
 
 	public function add()
 	{
+		$data['deptids'] = $this->dept_model->get_list();
 
-		$this->load->view($this->path.'/add');
+		$this->load->view($this->path.'/add',$data);
 	}
 	public function addone()
 	{
 	    
 	    if($this->manager_model->add_user()>0){
 	        $data['status']="true";
-	    }else{
+	    }elseif($this->manager_model->add_user()==-1){
+	        $data['status']="用户名已存在";
+		}else{
 	        $data['status']="添加失败";
 	    }
 	    echo json_encode($data);
@@ -63,11 +68,13 @@ class Manager extends Base {
 	public function edit()
 	{
 		$data['info'] = $this->manager_model->getinfo();
+		$data['deptids'] = $this->dept_model->get_list();
+
 		$this->load->view($this->path.'/edit',$data);
 	}
 	public function update()
 	{
-	    
+	    // echo $this->input->post_get('is_manager', TRUE);exit;
 	    if($this->manager_model->update()>0){
 	        $data['status']="true";
 	    }else{
@@ -87,6 +94,8 @@ class Manager extends Base {
 	    
 	    if($this->manager_model->uppass()>0){
 	        $data['status']="true";
+	    }elseif($this->manager_model->uppass()==-1){
+	        $data['status']="原密码错误";
 	    }else{
 	        $data['status']="操作失败";
 	    }

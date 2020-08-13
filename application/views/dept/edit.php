@@ -24,30 +24,33 @@
     <div class="x-body">
         <form class="layui-form">
             <div class="layui-form-item">
-              <label for="L_username" class="layui-form-label">
-                  <span class="x-red">*</span>用户名
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
-                  autocomplete="off" class="layui-input" value='<?=$info->username?>' readonly>
-              </div>
-             
-          </div>
-         
-          <div class="layui-form-item">
-              <label for="L_deptid" class="layui-form-label">
-                  <span class="x-red">*</span>所属部门
+                <label for="L_name" class="layui-form-label">
+                    <span class="x-red">*</span>部门名称
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_name" name="name" required="" lay-verify="name"
+                    autocomplete="off" class="layui-input" value='<?=$info->name?>'>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+              <label for="L_pid" class="layui-form-label">
+                  <span class="x-red">*</span>上级部门
               </label>
               <div class="layui-input-inline">
                   <!-- <input type="text" id="L_mid" name="mid" required="" lay-verify="mid"
                   autocomplete="off" class="layui-input"> -->
 
-                  <select name="deptid" id="L_deptid" lay-verify="required" class="layui-input">
-                        <option value="">请选择所属部门</option>
+                  <select name="pid" id="L_pid" lay-verify="required|pid" class="layui-input"
+                  <?php if ($info->id==1): ?>
+                    disabled
+                  <?php endif; ?>
+                  >
+                        <option value="">请选择上级部门</option>
                         
-                        <?php foreach ($deptids as $item): ?>
+                        <?php foreach ($pids as $item): ?>
                         <option value="<?=$item['id']?>"
-                        <?php if ($item['id'] === $info->deptid): ?>
+                        <?php if ($item['id'] === $info->pid): ?>
                             selected
                          <?php endif; ?>
                         ><?php echo str_repeat('---',$item['level'])?><?=$item['name']?></option>
@@ -59,42 +62,14 @@
               
              
           </div>
-          <div class="layui-form-item">
-              <label for="L_is_manager" class="layui-form-label">
-                  <span class="x-red">*</span>是否部门管理员
-              </label>
-              <!-- <div class="layui-input-inline">
-                  <input type="text" id="L_is_manager" name="is_manager" required="" lay-verify="is_manager"
-                  autocomplete="off" class="layui-input">
-              </div> -->
-              <div class="layui-input-inline">
-                <input type="checkbox" value=1 name="is_manager" <?php if ($info->is_manager == '1'): ?>checked<?php endif; ?> lay-skin="switch" lay-text="是|否" class="layui-input">
-              </div>
-          </div>
-          <!-- 
-          <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>密码
-              </label>
-              <div class="layui-input-inline">
-                  <input type="password" id="L_pass" name="pass" required="" lay-verify="pass"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  6到16个字符
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_repass" class="layui-form-label">
-                  <span class="x-red">*</span>确认密码
-              </label>
-              <div class="layui-input-inline">
-                  <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
-                  autocomplete="off" class="layui-input">
-              </div>
-          </div>-->
-          <input type="hidden" name="id" value="<?=$info->id?>">
+       
+        
+              
+          
 
+
+
+          <input type="hidden" name="id" value="<?=$info->id?>">
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
@@ -130,12 +105,13 @@
         //监听提交
         form.on('submit(add)', function(data){
          
-     
           var param=JSON.stringify(data.field);
-          console.log(param);
+          
           var strObj = eval("(" + param + ")");
+          console.log(strObj);
+          
           $.ajax({
-              url:"/manager/update",
+              url:"/dept/update",
               type:'get',//method请求方式，get或者post
               dataType:'json',//预期服务器返回的数据类型
               data:strObj,//表格数据序列化
@@ -154,8 +130,8 @@
                       //关闭当前frame
                       parent.layer.close(index);
                       parent.location.reload();
-
                   });
+                  
               }else{
                    layer.alert(data.status,{icon: 5});
               }

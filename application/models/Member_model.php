@@ -35,8 +35,12 @@ class Member_model extends CI_Model {
         }else{
             $this->db->limit($limit,$limit*($pages-1));
         }
+		$this->db->select('member.*,dept.name');
+
         
-        $this->db->where('is_del', "0");//0没有删除
+        $this->db->where('member.is_del', "0");//0没有删除
+		$this->db->join('dept', 'member.deptid = dept.id','left');
+
         $query = $this->db->get($this->table);
 
         return $query->result_array();

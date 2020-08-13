@@ -41,24 +41,32 @@ class Manager_model extends Base_model {
         }else{
             $this->db->limit($limit,$limit*($pages-1));
         }
+        $this->db->select('manager.*,dept.name as deptname');
+
         
-        $this->db->where('is_del', "0");//0没有删除
+        $this->db->where('manager.is_del', "0");//0没有删除
         if(!empty($this->datascope)){
-            $this->db->where_in('id', $this->datascope);//数据范围
+            $this->db->where_in('manager.id', $this->datascope);//数据范围
         }
+		$this->db->join('dept', 'manager.deptid = dept.id','left');
+
         $query = $this->db->get($this->table);
+        Dlog_model::save( $this->db->last_query() );
+
 
         return $query->result_array();
         
     }
     public function add_user()
     {
-
+        if($this->has_username($this->input->post_get('username', TRUE))>0){
+            return -1;
+        }
         $data = array(
             'username' =>  $this->input->post_get('username', TRUE),
-            'email' => $this->input->post_get('email', TRUE),
-            'phone' => $this->input->post_get('phone', TRUE),
-            'password' => $this->input->post_get('pass', TRUE)
+            'deptid' => $this->input->post_get('deptid', TRUE),
+            'is_manager' => $this->input->post_get('is_manager', TRUE),
+            'password' => md5($this->input->post_get('pass', TRUE))
         );
 
         $this->db->replace($this->table, $data);
@@ -66,6 +74,13 @@ class Manager_model extends Base_model {
         return $this->db->affected_rows();;
         
     }
+    protected function has_username($username){
+        $this->db->where('is_del', "0");//0没有删除
+        $this->db->where('username',$username);
+        return $this->db->count_all_results($this->table);
+
+    }
+
     public function del_user()
     {
         $delllist=$this->input->post_get('dellist', TRUE);
@@ -93,10 +108,12 @@ class Manager_model extends Base_model {
     public function update()
     {
         $data = array(
-            'email' =>  $this->input->post_get('email', TRUE),
-            'phone' => $this->input->post_get('phone', TRUE)
+            'deptid' =>  $this->input->post_get('deptid', TRUE),
+            'is_manager' =>  $this->input->post_get('is_manager', TRUE)
+            // 'phone' => $this->input->post_get('phone', TRUE)
             
         );
+        // var_dump($data);exit;
         
         $id=$this->input->post_get('id', TRUE);
         
@@ -115,9 +132,12 @@ class Manager_model extends Base_model {
         if($this->input->post_get('pass', TRUE)==null||$this->input->post_get('pass', TRUE)==""){
             return ;
         }
+        if($this->checkUserPass($this->input->post_get('id', TRUE),$this->input->post_get('oldpass', TRUE))<1){
+            return -1;
+        }
         
         $data = array(
-            'password' => $this->input->post_get('pass', TRUE)
+            'password' => md5($this->input->post_get('pass', TRUE))
             
         );
         
@@ -131,6 +151,12 @@ class Manager_model extends Base_model {
         
         return $this->db->affected_rows();;
         
+    }
+    protected function checkUserPass($id,$pass){
+        $this->db->where('id',$id);
+        $this->db->where('password',md5($pass));
+        return $this->db->count_all_results($this->table);
+
     }
 
 
@@ -151,7 +177,7 @@ class Manager_model extends Base_model {
     public function get_userinfo()
     {
     	$this->username  = $this->input->post_get('username', TRUE);// please read the below note
-        $this->password  = $this->input->post_get('password', TRUE);
+        $this->password  = md5($this->input->post_get('password', TRUE));
        
         $this->db->where('username', $this->username);
         $this->db->where('password', $this->password);

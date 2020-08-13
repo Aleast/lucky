@@ -24,19 +24,19 @@
     <div class="x-body">
         <form class="layui-form">
           <div class="layui-form-item">
-              <label for="L_username" class="layui-form-label">
-                  用户名
+              <label for="L_nickname" class="layui-form-label">
+                  昵称
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="L_username" name="username" disabled="true" value="<?=$info->username?>" class="layui-input">
+                  <input type="text" id="L_nickname" name="username" disabled="true" value="<?=$info->nickName?>" class="layui-input">
               </div>
           </div>
           <div class="layui-form-item">
-              <label for="L_oldpass" class="layui-form-label">
+              <label for="L_repass" class="layui-form-label">
                   <span class="x-red">*</span>旧密码
               </label>
               <div class="layui-input-inline">
-                  <input type="password" id="L_oldpass" name="oldpass" required="" lay-verify="required"
+                  <input type="password" id="L_repass" name="oldpass" required="" lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -45,7 +45,7 @@
                   <span class="x-red">*</span>新密码
               </label>
               <div class="layui-input-inline">
-                  <input type="password" id="L_pass" name="pass" required="" lay-verify="required|pass"
+                  <input type="password" id="L_pass" name="pass" required="" lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -57,17 +57,15 @@
                   <span class="x-red">*</span>确认密码
               </label>
               <div class="layui-input-inline">
-                  <input type="password" id="L_repass" name="repass" required="" lay-verify="required|repass"
+                  <input type="password" id="L_repass" name="repass" required="" lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
-          <input type="hidden" name="id" value="<?=$info->id?>">
-
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
               <button  class="layui-btn" lay-filter="save" lay-submit="">
-                  修改
+                  增加
               </button>
           </div>
       </form>
@@ -77,28 +75,18 @@
                 $ = layui.jquery;
               var form = layui.form
               ,layer = layui.layer;
-               //自定义验证规则
-                form.verify({
-                
-                    pass: [/(.+){6,12}$/, '密码必须6到12位'],
-                    repass: function(value){
-                        if($('#L_pass').val()!=$('#L_repass').val()){
-                            return '两次密码不一致';
-                        }
-                    }
-                });
             
               //监听提交
               form.on('submit(save)', function(data){
                 
                 //发异步，把数据提交给php
                 
-              
+                 data.field.id=<?=$_REQUEST['id']?>;
           		var param=JSON.stringify(data.field);
           console.log(param);
           var strObj = eval("(" + param + ")");
           $.ajax({
-              url:"/manager/uppass",
+              url:"/member/uppass",
               type:'get',//method请求方式，get或者post
               dataType:'json',//预期服务器返回的数据类型
               data:strObj,//表格数据序列化
