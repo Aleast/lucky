@@ -6,25 +6,68 @@ class Rl_model extends CI_Model
     public $id;
     public $name;
     public $price;
+    public $datascope=[];
 
     public function __construct()
     {
         $this->load->database();
+
+        $this->load->library('session');
+        $is_manager = isset($_SESSION['is_manager'])?$_SESSION['is_manager']:0;
+        $mid = isset($_SESSION['mid'])?$_SESSION['mid']:0;
+        $deptid = isset($_SESSION['deptid'])?$_SESSION['deptid']:0;
+
+        if(empty($is_manager)){
+            $this->datascope[] = $mid;
+            // var_dump($this->datascope);exit;
+        }elseif(!empty($deptid)){
+
+        }
+
     }
+
+   
 
     public function get_count()
     {
 
         $this->db->where('is_del', "0");//0没有删除
+        
         return $this->db->count_all_results($this->table);
 
     }
     public function get_list()
     {
-        $this->db->where('is_del', "0");//0没有删除
-		$this->db->order_by('addtime', 'asc');//0没有删除
-        $query = $this->db->get($this->table);
-        return $query->result_array();
+        $pages = $this->input->post_get('pages', true);
+        $limit = $this->input->post_get('limit', true);
+
+        if(!$pages){
+            $pages=1;
+        }
+        if(!$limit){
+            $limit=10;
+        }
+
+        if($pages==1){
+           
+            $this->db->limit($limit,0);
+        }else{
+            $this->db->limit($limit,$limit*($pages-1));
+        }
+		$this->db->select('rl.*,manager.username');
+        $this->db->where('rl.is_del', "0");//0没有删除
+        
+        if(!empty($this->datascope)){
+            $this->db->where_in('mid', $this->datascope);//数据范围
+        }
+        
+		$this->db->order_by('rl.id desc');//0没有删除
+		
+		$this->db->join('manager', 'rl.mid = manager.id','left');
+
+
+		$query = $this->db->get($this->table);
+		return $query->result_array();
 
     }
    
@@ -62,7 +105,9 @@ class Rl_model extends CI_Model
         $data = array(
             'cid' =>  $this->input->post_get('cid', TRUE),
             'mid' => $this->input->post_get('mid', TRUE),
-            'cphone' => $this->input->post_get('phone', TRUE),
+            'cphone' => $this->input->post_get('cphone', TRUE),
+            'addtime' => time()
+
         );
 
         $this->db->replace($this->table, $data);
@@ -106,12 +151,12 @@ class Rl_model extends CI_Model
 
             'cid' =>  $this->input->post_get('cid', TRUE),
             'mid' => $this->input->post_get('mid', TRUE),
-            'cphone' => $this->input->post_get('phone', TRUE),
+            'cphone' => $this->input->post_get('cphone', TRUE),
         );
 
-        $cphone = $this->input->post_get('phone', true);
-
-        $this->db->where('cphone', $cphone);
+        $id = $this->input->post_get('id', true);
+        // var_dump($id);exit;
+        $this->db->where('id', $id);
         $this->db->update($this->table, $data);
 
         return $this->db->affected_rows();
@@ -156,6 +201,7 @@ class Rl_model extends CI_Model
         return $query->row();
 
     }
+    
 
 }
 

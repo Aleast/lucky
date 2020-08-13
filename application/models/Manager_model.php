@@ -1,7 +1,7 @@
 <?php
-class Member_model extends CI_Model {
+class Manager_model extends CI_Model {
 
-	public $table='member';
+	public $table='manager';
 	public $username;
     public $password;
      public function __construct()

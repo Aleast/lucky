@@ -14,7 +14,7 @@
         </a>
         <div class="collapse" id="ui-basic">
           <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="/user?pages=1&limit=10">客户信息</a></li>
+          <li class="nav-item"> <a class="nav-link" href="/rl?pages=1&limit=10">客户信息</a></li>
             <!-- <li class="nav-item"> <a class="nav-link" href="/member?pages=1&limit=10">管理员信息</a></li> -->
           
           </ul>
@@ -29,8 +29,8 @@
         <div class="collapse" id="ui-basic">
           <ul class="nav flex-column sub-menu">
           <!-- <li class="nav-item"> <a class="nav-link" href="/user?pages=1&limit=10">客户信息</a></li> -->
-            <li class="nav-item"> <a class="nav-link" href="/member?pages=1&limit=10">管理员信息</a></li>
-            <li class="nav-item"> <a class="nav-link" href="/member?pages=1&limit=10">部门管理</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/manager?pages=1&limit=10">管理员信息</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/manager?pages=1&limit=10">部门管理</a></li>
           
           </ul>
         </div>
