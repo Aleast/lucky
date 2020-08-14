@@ -49,6 +49,13 @@ class Base_model extends CI_Model
         return $query->result_array();
     }
 
+    //判断某表中某字段是否存在某值
+    protected function has_exist($class,$value,$table){
+        $this->db->where('is_del', "0");//0没有删除
+        $this->db->where($class,$value);
+        return $this->db->count_all_results($table);
+    }
+
    
 
     

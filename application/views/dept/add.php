@@ -24,6 +24,27 @@
     <div class="x-body">
         <form class="layui-form">
             <div class="layui-form-item">
+                <label for="L_pid" class="layui-form-label">
+                    <span class="x-red">*</span>上级部门
+                </label>
+                <div class="layui-input-inline">
+                    <!-- <input type="text" id="L_mid" name="mid" required="" lay-verify="mid"
+                    autocomplete="off" class="layui-input"> -->
+
+                    <select name="pid" id="L_pid" lay-filter="L_pid" lay-verify="required" class="layui-input">
+                            <option value="">请选择上级部门</option>
+                            
+                            <?php foreach ($pids as $item): ?>
+                            <option value="<?=$item['id']?>@|@<?=$item['name']?>"><?php echo str_repeat('---',$item['level'])?><?=$item['name']?></option>
+                            <?php endforeach;?>  
+                        
+                    </select>
+
+                </div>
+                
+                
+            </div>
+            <div class="layui-form-item">
                 <label for="L_name" class="layui-form-label">
                     <span class="x-red">*</span>部门名称
                 </label>
@@ -31,29 +52,13 @@
                     <input type="text" id="L_name" name="name" required="" lay-verify="name"
                     autocomplete="off" class="layui-input">
                 </div>
+                <div class="layui-form-mid layui-word-aux">
+                  建议部门前缀，请在后面添加
+                </div>
             </div>
+            
         
-          <div class="layui-form-item">
-              <label for="L_pid" class="layui-form-label">
-                  <span class="x-red">*</span>上级部门
-              </label>
-              <div class="layui-input-inline">
-                  <!-- <input type="text" id="L_mid" name="mid" required="" lay-verify="mid"
-                  autocomplete="off" class="layui-input"> -->
-
-                  <select name="pid" id="L_pid" lay-verify="required" class="layui-input">
-                        <option value="">请选择上级部门</option>
-                        
-                        <?php foreach ($pids as $item): ?>
-                        <option value="<?=$item['id']?>"><?php echo str_repeat('---',$item['level'])?><?=$item['name']?></option>
-                        <?php endforeach;?>  
-                      
-                  </select>
-
-              </div>
-              
-             
-          </div>
+          
          
            <!-- <div class="layui-form-item">
               <label for="L_email" class="layui-form-label">
@@ -119,6 +124,17 @@
             }
           });
 
+          form.on('select(L_pid)', function(data){
+            var selectpid = data.value.split('@|@');
+           
+            console.log(data);
+            if(selectpid[0]!=1&&selectpid[0]!=0){
+                $('#L_name').val(selectpid[1]+"-");
+            }
+          });
+
+         
+
           //监听提交
           form.on('submit(add)', function(data){
         	  var param=JSON.stringify(data.field);
@@ -163,9 +179,13 @@
             
             return false;
           });
+
           
           
         });
+    </script>
+    <script>
+       
     </script>
    
   </body>

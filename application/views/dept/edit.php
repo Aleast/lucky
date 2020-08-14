@@ -24,16 +24,6 @@
     <div class="x-body">
         <form class="layui-form">
             <div class="layui-form-item">
-                <label for="L_name" class="layui-form-label">
-                    <span class="x-red">*</span>部门名称
-                </label>
-                <div class="layui-input-inline">
-                    <input type="text" id="L_name" name="name" required="" lay-verify="name"
-                    autocomplete="off" class="layui-input" value='<?=$info->name?>'>
-                </div>
-            </div>
-
-            <div class="layui-form-item">
               <label for="L_pid" class="layui-form-label">
                   <span class="x-red">*</span>上级部门
               </label>
@@ -42,7 +32,7 @@
                   autocomplete="off" class="layui-input"> -->
 
                   <select name="pid" id="L_pid" lay-verify="required|pid" class="layui-input"
-                  <?php if ($info->id==1): ?>
+                  <?php if ($info->id==$_SESSION['deptid']): ?>
                     disabled
                   <?php endif; ?>
                   >
@@ -52,16 +42,26 @@
                         <option value="<?=$item['id']?>"
                         <?php if ($item['id'] === $info->pid): ?>
                             selected
-                         <?php endif; ?>
+                        <?php endif; ?>
                         ><?php echo str_repeat('---',$item['level'])?><?=$item['name']?></option>
                         <?php endforeach;?>  
                       
                   </select>
 
               </div>
-              
-             
-          </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="L_name" class="layui-form-label">
+                    <span class="x-red">*</span>部门名称
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_name" name="name" required="" lay-verify="name"
+                    autocomplete="off" class="layui-input" value='<?=$info->name?>'>
+                </div>
+            </div>
+
+            
        
         
               

@@ -44,6 +44,16 @@ class Dept extends Base {
 			$data['status']="true";
 			
 	        
+		}elseif($this->dept_model->add()==-1){
+		
+			$data['status']="部门名称已存在";
+			
+	        
+	    }elseif($this->dept_model->add()==-2){
+		
+			$data['status']="不能添加部门到无管理权限的部门";
+			
+	        
 	    }else{
 	        $data['status']="添加失败";
 	    }

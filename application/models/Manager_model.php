@@ -59,7 +59,7 @@ class Manager_model extends Base_model {
     }
     public function add_user()
     {
-        if($this->has_username($this->input->post_get('username', TRUE))>0){
+        if($this->has_exist('username',$this->input->post_get('username', TRUE),$this->table)>0){
             return -1;
         }
         $data = array(
@@ -74,12 +74,7 @@ class Manager_model extends Base_model {
         return $this->db->affected_rows();;
         
     }
-    protected function has_username($username){
-        $this->db->where('is_del', "0");//0没有删除
-        $this->db->where('username',$username);
-        return $this->db->count_all_results($this->table);
-
-    }
+   
 
     public function del_user()
     {

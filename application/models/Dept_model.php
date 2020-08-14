@@ -71,7 +71,7 @@ class Dept_model extends Base_model
     public function get_list()
     {
         $this->db->where('is_del', "0");//0没有删除
-        $this->db->order_by('addtime', 'asc');//0没有删除
+        $this->db->order_by('name', 'asc');//0没有删除
         if(!empty($this->deptscope)){
             $this->db->where_in('id', $this->deptscope);//数据范围
         }
@@ -119,12 +119,22 @@ class Dept_model extends Base_model
         // $mid=$this->input->post_get('mid', true);
         // $addtime =$this->input->post_get('addtime', true);
         //var_dump($insertdata);
+        if($this->has_exist('name',$this->input->post_get('name', TRUE),$this->table)>0){
+            return -1;
+        }
+        $pid_array = explode('@|@',$this->input->post_get('pid', true));
+
         $addtime=time();
         $data = array(
             'name'=>$this->input->post_get('name', true),
-            'pid'=>$this->input->post_get('pid', true),
+            'pid'=>$pid_array[0],
             'addtime' => $addtime
         );
+        
+        //不能添加部门到不属于自己管辖的部门
+        if(!empty($this->deptscope)&&!in_array($data['pid'],$this->deptscope)){
+            return -2;
+        }
       
         $this->db->replace($this->table, $data);
         Dlog_model::save( $this->db->last_query() );
