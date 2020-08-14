@@ -58,14 +58,16 @@
 
           <div class="layui-form-item">
               <label for="L_is_manager" class="layui-form-label">
-                  <span class="x-red">*</span>是否部门管理员
+                  <span class="x-red">*</span>查看范围
               </label>
               <!-- <div class="layui-input-inline">
                   <input type="text" id="L_is_manager" name="is_manager" required="" lay-verify="is_manager"
                   autocomplete="off" class="layui-input">
               </div> -->
               <div class="layui-input-inline">
-                <input type="checkbox" name="is_manager" value=1 lay-skin="switch" lay-text="是|否" class="layui-input">
+                <!-- <input type="checkbox" name="is_manager" value=1 lay-skin="switch" lay-text="部门|个人" class="layui-input"> -->
+                <input type="radio" name="is_manager" value="0" title="个人" checked class="layui-input">
+                <input type="radio" name="is_manager" value="1" title="部门" class="layui-input">
               </div>
           </div>
          

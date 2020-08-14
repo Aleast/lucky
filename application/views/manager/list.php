@@ -84,7 +84,7 @@
                           <th>加入时间</th>
                           <th>注册链接</th>
                           <th>所属部门</th>
-                          <th>是否部门管理员</th>
+                          <th>查看范围</th>
                           <th>状态</th>
                           
                           <th>操作</th>
@@ -100,7 +100,7 @@
                           <td> <?=$item['addtime']?></td>
                           <td> https://www.lucky-shop.in/?/mobile/user/register&invite_code=<?=$item['id']?></td>
                           <td><?=$item['deptname']?></td>
-                          <td><?php if ($item['is_manager'] === '1'): ?>是<?php else: ?>否<?php endif; ?></td>
+                          <td><?php if ($item['is_manager'] === '1'): ?>部门<?php else: ?>个人<?php endif; ?></td>
                           
                           <td> <?php if ($item['is_use'] === '0'): ?>
 

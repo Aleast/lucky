@@ -61,14 +61,16 @@
           </div>
           <div class="layui-form-item">
               <label for="L_is_manager" class="layui-form-label">
-                  <span class="x-red">*</span>是否部门管理员
+                  <span class="x-red">*</span>查看范围
               </label>
               <!-- <div class="layui-input-inline">
                   <input type="text" id="L_is_manager" name="is_manager" required="" lay-verify="is_manager"
                   autocomplete="off" class="layui-input">
               </div> -->
               <div class="layui-input-inline">
-                <input type="checkbox" value=1 name="is_manager" <?php if ($info->is_manager == '1'): ?>checked<?php endif; ?> lay-skin="switch" lay-text="是|否" class="layui-input">
+
+                <input type="radio" name="is_manager" value="0" title="个人" class="layui-input" <?php if ($info->is_manager == '1'): ?>checked<?php endif; ?>>
+                <input type="radio" name="is_manager" value="1" title="部门" class="layui-input" <?php if ($info->is_manager == '1'): ?>checked<?php endif; ?>>
               </div>
           </div>
           <!-- 
