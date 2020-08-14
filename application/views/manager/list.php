@@ -107,7 +107,7 @@
                           <td><?php if ($item['is_manager'] === '1'): ?>部门<?php else: ?>个人<?php endif; ?></td>
                           
                           <td> 
-                          <?php if($_SESSION['is_manager']==1){?>
+                          <?php if($_SESSION['is_manager']==1 && $item['id']!=$_SESSION['mid']){?>
                           
                           
                           <?php if ($item['is_use'] === '0'): ?>
@@ -133,7 +133,7 @@
 <td>
 <label class="badge badge-success" onclick="x_admin_show('修改密码','/manager/cpass?id=<?=$item['id']?>',600,400)">修改密码</label>
 
-<?php if($_SESSION['is_manager']==1){?>
+<?php if($_SESSION['is_manager']==1 && $item['id']!=$_SESSION['mid']){?>
 
   <label class="badge badge-info" onclick="x_admin_show('编辑','/manager/edit?id=<?=$item['id']?>',600,400)">编辑</label>
 

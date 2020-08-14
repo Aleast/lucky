@@ -33,7 +33,10 @@
               </div>
              
           </div>
-         
+        
+          
+          <?php if ($info->id != $_SESSION['mid']): ?>
+
           <div class="layui-form-item">
               <label for="L_deptid" class="layui-form-label">
                   <span class="x-red">*</span>所属部门
@@ -73,6 +76,8 @@
                 <input type="radio" name="is_manager" value="1" title="部门" class="layui-input" <?php if ($info->is_manager == '1'): ?>checked<?php endif; ?>>
               </div>
           </div>
+
+          <?php endif; ?>
           <!-- 
           <div class="layui-form-item">
               <label for="L_pass" class="layui-form-label">
