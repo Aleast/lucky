@@ -37,29 +37,16 @@ class Message_model extends Base_model
 
         if($pages==1){
            
-            $sql='select m.name as name,m.content as content,m.addtime as addtime,m.uid as uid,m.pid as pid,m.id as id,us.nickName as nickName,wx.nickName as tonickName
-            from message as m,wxuser us,wxuser as wx where m.uid=us.id and m.pid=wx.id and m.is_del=0 limit 0,'.$limit;
+            $sql='select * from message where is_del=0 limit 0,'.$limit;
             
            // $this->db->limit($limit,0);
         }else{
 
-            $sql='select m.name as name,m.content as content,m.addtime as addtime,m.uid as uid,m.pid as pid,m.id as id,us.nickName as nickName,wx.nickName as tonickName
-            from message as m,wxuser us,wxuser as wx where m.uid=us.id and m.pid=wx.id and m.is_del=0 limit '.$limit*($pages-1).','.$limit;
+            $sql='select *  from message  where is_del=0 limit '.$limit*($pages-1).','.$limit;
             
             //$this->db->limit($limit,$limit*($pages-1));
         }
 
-
-
-        // $this->db->where('message.is_del', "0");//0没有删除
-        // $this->db->select('message.name as name,message.content as content,message.addtime as addtime,
-        // wxuser.nickName as nickName,message.id as id,message.uid as uid,message.pid as pid');
-		// $this->db->order_by('message.addtime', 'desc');
-
-		// $this->db->from('message');
-        // $this->db->join('wxuser', 'message.uid = wxuser.id');
-        // $this->db->join('wxuser as wx', 'message.pid = wxuser.id');
-       
         return $this->db->query($sql)->result_array();
 
     }
