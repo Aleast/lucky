@@ -25,7 +25,7 @@ class Base_model extends CI_Model
 
     protected function get_dept_users($deptid){
         static $mid_arr = [];
-        $this->db->where('is_del','0');
+        // $this->db->where('is_del','0');
         $this->db->where('deptid',$deptid);
         $query = $this->db->get('manager');
         Dlog_model::save( $this->db->last_query() );

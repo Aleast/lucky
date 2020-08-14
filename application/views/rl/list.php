@@ -94,7 +94,13 @@
 
                           <td><?=$item['cphone']?></td>
                           <td><?=$item['cid']?></td>
-                          <td><?=$item['username']?></td>
+                          <td>
+                          <?php if ($item['m_is_del'] == '0'): ?>
+                            <?=$item['username']?>
+                          <?php else: ?>
+                            未分配
+                          <?php endif; ?>
+                          </td>
                           <td><?=$item['deptname']?></td>
 
 
