@@ -176,7 +176,8 @@ class Manager_model extends Base_model {
        
         $this->db->where('username', $this->username);
         $this->db->where('password', $this->password);
-        
+        $this->db->where('is_del', 0);
+        $this->db->where('is_use', 1);
         $query = $this->db->get($this->table);
         
         Dlog_model::save( $this->db->last_query() );

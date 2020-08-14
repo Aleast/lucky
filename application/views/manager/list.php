@@ -104,11 +104,11 @@
                           
                           <td> <?php if ($item['is_use'] === '0'): ?>
 
-                            <label class="badge badge-danger" onclick="stop(this,<?=$item['id']?>)">停用</label>
+                            <label class="badge badge-danger" onclick="stop(this,<?=$item['id']?>)">已停用</label>
 
 <?php elseif ($item['is_use'] === '1'): ?>
 
-  <label class="badge badge-danger" onclick="stop(this,<?=$item['id']?>)">启用</label>
+  <label class="badge badge-success" onclick="stop(this,<?=$item['id']?>)">已启用</label>
 
 <?php else: ?>
   <label class="badge badge-danger" >未知</label>
@@ -236,20 +236,20 @@
                    
                   if(data.status=="true"){
                   	 	
-                	  if($(obj).html()=='启用'){
+                	  if($(obj).html()=='已启用'){
 
                         
 
                           $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('停用');
-                          layer.msg('已停用!',{icon: 5,time:1000});
+                         // layer.msg('已停用!',{icon: 5,time:1000});
 
                         }else{
                        
 
                           $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('启用');
-                          layer.msg('已启用!',{icon: 5,time:1000});
+                         // layer.msg('已启用!',{icon: 5,time:1000});
                         }
-
+                      location.reload();
                 	  
                    
                   }else{
