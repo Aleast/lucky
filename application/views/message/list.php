@@ -81,8 +81,7 @@
                         <th>ID</th>
                         <th>标题</th>
                         <th>内容</th>
-                        <th>用户</th>
-                        <th>时间</th>
+                         <th>时间</th>
                         <th>操作</th>
                         </tr>
                       </thead>
@@ -93,8 +92,7 @@
                           <td><?= @$i=$i+1 ?></td>
                           <td><?=$item['name']?></td>
                           <td><?=$item['content']?></td>
-                          <td><?=$item['tonickName']?>-<?=$item['nickName']?></td>
-                          <td><?=$item['addtime']?></td>
+                           <td><?=$item['addtime']?></td>
                           <td class="td-manage">
                           
                           
