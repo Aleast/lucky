@@ -55,9 +55,13 @@
                   <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
                     <i class="mdi mdi-clock-outline text-muted"></i>
                   </button> -->
+
+                  <?php if($_SESSION['is_manager']==1){?>
                   <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0" onclick="x_admin_show('新增','/manager/add?>',600,400)">
                     <i class="mdi mdi-plus text-muted"></i>
                   </button>
+                  <?php }?>
+
                   <!-- <button class="btn btn-primary mt-2 mt-xl-0">Download report</button> -->
                 </div>
               </div>
@@ -102,7 +106,11 @@
                           <td><?=$item['deptname']?></td>
                           <td><?php if ($item['is_manager'] === '1'): ?>部门<?php else: ?>个人<?php endif; ?></td>
                           
-                          <td> <?php if ($item['is_use'] === '0'): ?>
+                          <td> 
+                          <?php if($_SESSION['is_manager']==1){?>
+                          
+                          
+                          <?php if ($item['is_use'] === '0'): ?>
 
                             <label class="badge badge-danger" onclick="stop(this,<?=$item['id']?>)">已停用</label>
 
@@ -114,16 +122,23 @@
   <label class="badge badge-danger" >未知</label>
 
 <?php endif; ?>
+
+<?php }else{?>
+
+--
+<?php }?>
 </td>
 
 
 <td>
-              <label class="badge badge-info" onclick="x_admin_show('编辑','/manager/edit?id=<?=$item['id']?>',600,400)">编辑</label>
+<label class="badge badge-success" onclick="x_admin_show('修改密码','/manager/cpass?id=<?=$item['id']?>',600,400)">修改密码</label>
 
-              <label class="badge badge-success" onclick="x_admin_show('修改密码','/manager/cpass?id=<?=$item['id']?>',600,400)">修改密码</label>
+<?php if($_SESSION['is_manager']==1){?>
+
+  <label class="badge badge-info" onclick="x_admin_show('编辑','/manager/edit?id=<?=$item['id']?>',600,400)">编辑</label>
 
               <label class="badge badge-warning" onclick="member_del(this,<?=$item['id']?>)">删除</label>
-
+<?php }?>
 
             </td>
                         </tr>
