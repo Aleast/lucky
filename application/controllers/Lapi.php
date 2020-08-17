@@ -12,6 +12,8 @@ class Lapi extends RestController {
         // Construct the parent class
         parent::__construct();
 		$this->load->model('rl_model');
+		$this->load->model('manager_model');
+
 	
     }
 
@@ -22,12 +24,22 @@ class Lapi extends RestController {
 
 	//$this->output->set_header("Access-Control-Allow-Origin: * ");
 
-		$insertdata=$this->_post_args;
+		// $insertdata=$this->_post_args;
 
 //		var_dump($insertdata);
 //		$start=$this->get('start');
 //		$end=$this->get('end');
 		$insertdata=$this->_post_args;
+		if(isset($insertdata['mid'])&&!empty($insertdata['mid'])){
+			$manager = $this->manager_model->get_user_by_invitecode($insertdata['mid']);
+			if(!empty($manager)){
+				$insertdata['mid'] = $manager['id'];
+			}else{
+				$insertdata['mid']=1;
+			}		
+		}else{
+			$insertdata['mid']=1;
+		}
 		$res= $this->rl_model->add($insertdata);
 		// Check if the users data store contains users
 		if ( $res )
@@ -43,6 +55,7 @@ class Lapi extends RestController {
 		}
 
 	}
+
 	
 	public function rl_get()
 	{

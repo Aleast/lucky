@@ -70,13 +70,36 @@ class Manager_model extends Base_model {
             'nickname' =>  $this->input->post_get('nickname', TRUE),
             'deptid' => $this->input->post_get('deptid', TRUE),
             'is_manager' => $this->input->post_get('is_manager', TRUE),
-            'password' => md5($this->input->post_get('pass', TRUE))
+            'password' => md5($this->input->post_get('pass', TRUE)),
+            'invitecode' => $this->generate_invite_code()
         );
 
         $this->db->replace($this->table, $data);
        
         return $this->db->affected_rows();;
         
+    }
+
+    protected function generate_invite_code(){
+        // 生成字母和数字组成的6位字符串
+        $str = range('A', 'Z');
+        // 去除大写的O，以防止与0混淆 
+        unset($str[array_search('O', $str)]);
+        $arr = array_merge(range(0, 9), $str);
+            shuffle($arr);
+        $invitecode = '';
+        $arr_len = count($arr);
+        for ($i = 0; $i < 4; $i++) {
+            $rand = mt_rand(0, $arr_len - 1);
+            $invitecode .= $arr[$rand];
+        }
+        $this->db->where('invitecode',$invitecode);
+        $count = $this->db->count_all_results($this->table);
+        if($count>0){
+            $invitecode = $this->generate_invite_code();
+        }
+        return $invitecode;
+
     }
    
 
@@ -191,6 +214,14 @@ class Manager_model extends Base_model {
 
         return $query->row();
         
+    }
+
+    public function get_user_by_invitecode($invitecode){
+        $this->db->where('invitecode', $invitecode);
+        $query = $this->db->get($this->table);
+        Dlog_model::save( $this->db->last_query() );
+
+        return $query->row_array();
     }
 
 }
