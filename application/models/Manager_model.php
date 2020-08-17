@@ -174,7 +174,7 @@ class Manager_model extends Base_model {
         }
         $this->db->update($this->table,$data);
         
-        return $this->db->affected_rows();;
+        return $this->db->affected_rows();
         
     }
     protected function checkUserPass($id,$pass){
@@ -222,6 +222,22 @@ class Manager_model extends Base_model {
         Dlog_model::save( $this->db->last_query() );
 
         return $query->row_array();
+    }
+
+    public function get_empty_invitecode_list(){
+        $this->db->where('is_del', "0");//0没有删除
+        $this->db->where('invitecode', "0");//0没有删除
+        $query = $this->db->get($this->table);
+        return $query->result_array();
+    }
+    public function addinvitecode($id){
+        
+        $data['invitecode'] = $this->generate_invite_code();
+        $this->db->where('id', $id);//0没有删除
+        $this->db->update($this->table,$data);
+        Dlog_model::save( $this->db->last_query() );
+
+        return $this->db->affected_rows();
     }
 
 }
