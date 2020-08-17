@@ -152,8 +152,8 @@
               }
             }
             ,nickname: function(value){
-              if(value.length < 4){
-                return '昵称至少得4个字符';
+              if(value.length < 2){
+                return '昵称至少得2个字符';
               }
             }
             ,pass: [/(.+){6,12}$/, '密码必须6到12位']
