@@ -240,6 +240,24 @@ class Manager_model extends Base_model {
         return $this->db->affected_rows();
     }
 
+    public function get_slash_name_list(){
+        $this->db->where('username like', '%-%');
+        $query = $this->db->get($this->table);
+        Dlog_model::save( $this->db->last_query() );
+
+        return $query->result_array();
+    }
+
+    public function updatenickname($id,$username,$nickname){
+        $data['username'] = $username;
+        $data['nickname'] = $nickname;
+        $this->db->where('id', $id);//0没有删除
+        $this->db->update($this->table,$data);
+        Dlog_model::save( $this->db->last_query() );
+
+        return $this->db->affected_rows();
+    }
+
 }
 
 

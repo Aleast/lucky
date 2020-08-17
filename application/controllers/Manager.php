@@ -122,4 +122,22 @@ class Manager extends Base {
 			$this->manager_model->addinvitecode($v['id']);
 		}
 	}
+
+	public function updatenickname(){
+		if($_SESSION['is_manager']!=1 ||$_SESSION['deptid']!=1){
+			echo 'no auth';
+			return;
+		}
+		$list = $this->manager_model->get_slash_name_list();
+		
+		foreach($list as $k => $v){
+		// 	echo '<pre>';
+		// var_dump($v);
+		// echo '</pre>';
+		// exit;
+			$username = explode('-',$v['username']);
+			
+			$this->manager_model->updatenickname($v['id'],$username[0],$username[1]);
+		}
+	}
 }
