@@ -36,6 +36,8 @@ class Manager extends Base {
 	        $data['status']="true";
 	    }elseif($this->manager_model->add_user()==-1){
 	        $data['status']="用户名已存在";
+		}elseif($this->manager_model->add_user()==-2){
+	        $data['status']="昵称已存在";
 		}else{
 	        $data['status']="添加失败";
 	    }
@@ -77,7 +79,9 @@ class Manager extends Base {
 	    // echo $this->input->post_get('is_manager', TRUE);exit;
 	    if($this->manager_model->update()>0){
 	        $data['status']="true";
-	    }else{
+	    }elseif($this->manager_model->update()==-2){
+	        $data['status']="昵称已存在";
+		}else{
 	        $data['status']="操作失败";
 	    }
 	    echo json_encode($data);

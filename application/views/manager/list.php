@@ -84,6 +84,7 @@
                         <tr>
                           <th>ID</th>
                           <th>用户名</th>
+                          <th>昵称</th>
                          
                           <th>加入时间</th>
                           <th>注册链接</th>
@@ -100,6 +101,8 @@
                         <tr>
                           <td><?=$item['id']?></td>
                           <td><?=$item['username']?></td>
+                          <td><?=$item['nickname']?></td>
+
                          
                           <td> <?=$item['addtime']?></td>
                           <td> https://www.lucky-shop.in/?/mobile/user/register&invite_code=<?=$item['id']?></td>

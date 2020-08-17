@@ -28,11 +28,24 @@
                   <span class="x-red">*</span>用户名
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
+                  <input type="text" id="L_username" name="username" required="" lay-verify="username"
                   autocomplete="off" class="layui-input" value='<?=$info->username?>' readonly>
+              </div>     
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>用户名不可修改
+              </div>       
+            </div>
+
+            <div class="layui-form-item">
+              <label for="L_nickname" class="layui-form-label">
+                  <span class="x-red">*</span>昵称
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_nickname" name="nickname" required="" lay-verify="nickname"
+                  autocomplete="off" class="layui-input" value='<?=$info->nickname?>'>
               </div>
-             
-          </div>
+                          
+            </div>
         
           
           <?php if ($info->id != $_SESSION['mid']): ?>
@@ -118,21 +131,21 @@
         ,layer = layui.layer;
       
         //自定义验证规则
-        /*
+        
         form.verify({
-          nikename: function(value){
-            if(value.length < 5){
-              return '昵称至少得5个字符啊';
-            }
-          }
-          ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-          ,repass: function(value){
-              if($('#L_pass').val()!=$('#L_repass').val()){
-                  return '两次密码不一致';
+            username: function(value){
+              if(value.length < 4){
+                return '用户名至少得4个字符';
               }
-          }
+            }
+            ,nickname: function(value){
+              if(value.length < 4){
+                return '昵称至少得4个字符';
+              }
+            }
+         
         });
-        //*/
+    
 
         //监听提交
         form.on('submit(add)', function(data){

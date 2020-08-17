@@ -81,6 +81,7 @@
                           <th>电话</th>
                           <th>商城ID</th>
                           <th>归属员工</th>
+                          <th>员工昵称</th>
                           <th>归属部门</th>
                           <th>创建时间</th>
                           <th>操作</th>
@@ -97,6 +98,13 @@
                           <td>
                           <?php if ($item['m_is_del'] == '0'): ?>
                             <?=$item['username']?>
+                          <?php else: ?>
+                            未分配
+                          <?php endif; ?>
+                          </td>
+                          <td>
+                          <?php if ($item['m_is_del'] == '0'): ?>
+                            <?=$item['nickname']?>
                           <?php else: ?>
                             未分配
                           <?php endif; ?>

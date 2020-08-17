@@ -62,8 +62,12 @@ class Manager_model extends Base_model {
         if($this->has_exist('username',$this->input->post_get('username', TRUE),$this->table)>0){
             return -1;
         }
+        if($this->has_exist('nickname',$this->input->post_get('nickname', TRUE),$this->table)>0){
+            return -2;
+        }
         $data = array(
             'username' =>  $this->input->post_get('username', TRUE),
+            'nickname' =>  $this->input->post_get('nickname', TRUE),
             'deptid' => $this->input->post_get('deptid', TRUE),
             'is_manager' => $this->input->post_get('is_manager', TRUE),
             'password' => md5($this->input->post_get('pass', TRUE))
@@ -101,17 +105,20 @@ class Manager_model extends Base_model {
         
     }
     public function update()
-    {
+    {   
+        $id=$this->input->post_get('id', TRUE);
+        if($this->has_exist_except('nickname',$id,$this->input->post_get('nickname', TRUE),$this->table)>0){
+            return -2;
+        }
         $data = array(
+            'nickname' =>  $this->input->post_get('nickname', TRUE),
             'deptid' =>  $this->input->post_get('deptid', TRUE),
             'is_manager' =>  $this->input->post_get('is_manager', TRUE)
             // 'phone' => $this->input->post_get('phone', TRUE)
             
         );
         // var_dump($data);exit;
-        
-        $id=$this->input->post_get('id', TRUE);
-        
+          
         $this->db->where('id', $id);
         if(!empty($this->datascope)){
             $this->db->where_in('id', $this->datascope);//数据范围

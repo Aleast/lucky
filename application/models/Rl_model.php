@@ -59,7 +59,7 @@ class Rl_model extends Base_model
         }else{
             $this->db->limit($limit,$limit*($pages-1));
         }
-		$this->db->select('rl.*,manager.username,dept.name as deptname,manager.is_del as m_is_del');
+		$this->db->select('rl.*,manager.username,manager.nickname,dept.name as deptname,manager.is_del as m_is_del');
         $this->db->where('rl.is_del', "0");//0没有删除
         
         if(!empty($this->datascope)){
