@@ -5,7 +5,7 @@ class Main extends Base {
 	  public function __construct()
     {
         parent::__construct();
-        $this->load->model('Member_model');
+        // $this->load->model('Member_model');
         // $this->load->helper('url_helper');
         
         // $this->load->library('session');

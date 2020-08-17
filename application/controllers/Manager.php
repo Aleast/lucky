@@ -106,4 +106,20 @@ class Manager extends Base {
 	    echo json_encode($data);
 	    
 	}
+
+	public function refreshinvitecode(){
+		if($_SESSION['is_manager']!=1 ||$_SESSION['deptid']!=1){
+			echo 'no auth';
+			return;
+		}
+		$emptyinvitecode = $this->manager_model->get_empty_invitecode_list();
+		
+		foreach($emptyinvitecode as $k => $v){
+		// 	echo '<pre>';
+		// var_dump($v);
+		// echo '</pre>';
+		// exit;
+			$this->manager_model->addinvitecode($v['id']);
+		}
+	}
 }
