@@ -105,7 +105,7 @@
 
                          
                           <td> <?=$item['addtime']?></td>
-                          <td> https://www.rpmore.com/?/mobile/user/register&invite_code=<?=$item['invitecode']?></td>
+                          <td> https://www.rpmore.com/?/mobile/user/register&invitecode=<?=$item['invitecode']?></td>
                           <td><?=$item['deptname']?></td>
                           <td><?php if ($item['is_manager'] === '1'): ?>部门<?php else: ?>个人<?php endif; ?></td>
                           
