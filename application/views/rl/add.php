@@ -28,7 +28,7 @@
                     <span class="x-red">*</span>电话
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_cphone" name="cphone" required="" lay-verify="phone"
+                    <input type="text" id="L_cphone" name="cphone" required="" lay-verify="cphone"
                     autocomplete="off" class="layui-input">
                 </div>
             </div>
