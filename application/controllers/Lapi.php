@@ -38,7 +38,7 @@ class Lapi extends RestController {
 				$insertdata['mid']=1;
 			}		
 		}else{
-			$insertdata['mid']=1;
+			$insertdata['mid']=2;
 		}
 		$res= $this->rl_model->add($insertdata);
 		// Check if the users data store contains users

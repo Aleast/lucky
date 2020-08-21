@@ -58,7 +58,7 @@
                   <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0" onclick="x_admin_show('新增','/rl/add?>',600,400)">
                     <i class="mdi mdi-plus text-muted"></i>
                   </button>
-                  <!-- <button class="btn btn-primary mt-2 mt-xl-0">Download report</button> -->
+                  <button class="btn btn-primary mt-2 mt-xl-0" onclick="exportData();">导出数据</button>
                 </div>
               </div>
             </div>
@@ -343,6 +343,21 @@
 
             
         });
+      }
+
+      function exportData () {
+        var data = tableCheck.getData();
+        strObj={"dellist":data}
+        console.log(strObj);
+        if(data==""){
+          layer.confirm('没有选中任何数据，是否导出全部数据？',function(index){
+            window.location.href= "/rl/exportdata";
+          });
+        }else{
+          layer.confirm('是否导出选中的数据？',function(index){
+            window.location.href= "/rl/exportdata"+"?ids = aaa";
+          });
+        }
       }
     </script>
 </html>

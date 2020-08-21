@@ -10,9 +10,11 @@ class Rl extends Base {
         parent::__construct();
         // $this->load->model('user_model');
 		$this->load->model('manager_model');
-        $this->load->model('rl_model');
+		$this->load->model('rl_model');
+		// $this->load->library('phpexcel');
+
 		
-        // $this->load->library('session');
+    
         // $this->load->helper('url_helper');
     }
 
@@ -94,6 +96,20 @@ class Rl extends Base {
 	        $data['status']="操作失败";
 	    }
 	    echo json_encode($data);
+	}
+
+	public function exportdata(){
+
+		// echo 'export';
+		$data['list'] = $this->rl_model->getExportData();
+		// echo '<pre>';
+		// var_dump($exportData);
+
+		// echo '<pre>';
+		$this->load->view($this->path.'/exportdata',$data);
+
+
+
 	}
 	
 	

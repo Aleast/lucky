@@ -230,6 +230,33 @@ class Rl_model extends Base_model
 
     }
     
+    public function getExportData(){
+        $ids = $this->input->post_get('ids', true);
+
+        if(empty($ids)){
+            $this->db->select('rl.*,manager.username,manager.nickname,dept.name as deptname,manager.is_del as m_is_del');
+            $this->db->where('rl.is_del', "0");//0没有删除
+            
+            if(!empty($this->datascope)){
+                $this->db->where_in('mid', $this->datascope);//数据范围
+            }
+            
+            $this->db->order_by('rl.id desc');//0没有删除
+            
+            $this->db->join('manager', 'rl.mid = manager.id','left');
+            $this->db->join('dept', 'manager.deptid = dept.id','left');
+
+        
+            $query = $this->db->get($this->table);
+            Dlog_model::save( $this->db->last_query() );
+            return $query->result_array();
+
+        }else{
+
+        }
+
+
+    }
 
 }
 
