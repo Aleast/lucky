@@ -54,7 +54,7 @@
                   <!-- <input type="text" id="L_mid" name="mid" required="" lay-verify="mid"
                   autocomplete="off" class="layui-input"> -->
 
-                  <select name="mid" id="L_mid" lay-verify="required" class="layui-input">
+                  <select name="mid" id="L_mid" lay-verify="required" lay-search class="layui-input">
                         <option value="">请选择客户归属</option>
                         
                         <?php foreach ($mids as $item): ?>
