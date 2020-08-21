@@ -57,6 +57,29 @@ class Manager_model extends Base_model {
         return $query->result_array();
         
     }
+
+    public function get_alluser()
+    {
+        
+
+        $this->db->select('manager.*,dept.name as deptname');
+
+        
+        $this->db->where('manager.is_del', "0");//0没有删除
+        if(!empty($this->datascope)){
+            $this->db->where_in('manager.id', $this->datascope);//数据范围
+        }
+		$this->db->join('dept', 'manager.deptid = dept.id','left');
+
+        $query = $this->db->get($this->table);
+        Dlog_model::save( $this->db->last_query() );
+
+
+        return $query->result_array();
+        
+    }
+
+
     public function add_user()
     {
         if($this->has_exist('username',$this->input->post_get('username', TRUE),$this->table)>0){

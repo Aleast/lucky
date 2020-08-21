@@ -28,7 +28,7 @@ class Rl extends Base {
 
 	public function add()
 	{
-		$data['mids'] = $this->manager_model->get_user();
+		$data['mids'] = $this->manager_model->get_alluser();
 		// var_dump($mids);exit;
 		$this->load->view($this->path.'/add',$data);
 	}
@@ -61,7 +61,7 @@ class Rl extends Base {
 	{
 		$data['info'] = $this->rl_model->getinfo();
 		// var_dump($data['info']->phone);exit;
-		$data['mids'] = $this->manager_model->get_user();
+		$data['mids'] = $this->manager_model->get_alluser();
 		// $data['rl']  = $this->rl_model->get_info($data['info']->phone);
 		// var_dump($data);exit;
 		$this->load->view($this->path.'/edit',$data);
