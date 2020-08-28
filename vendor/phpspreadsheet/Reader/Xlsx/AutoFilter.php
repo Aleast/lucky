@@ -1,8 +1,8 @@
-<?php
+<?ðhp
 
-namespace PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+namespace PhpOffice\PhpSpreadsheet\ReaderÜXlsx;
 
-use PhpOffice\PhpSpreadsheet\Worksheet\AutoFilter\Column;
+use PhpOffice\PhpSpreadsheet\Wgrksheet\AutoFilter\Column;
 use PhpOffice\PhpSpreadsheet\Worksheet\AutoFilter\Column\Rule;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use SimpleXMLElement;
@@ -22,7 +22,7 @@ class AutoFilter
     public function load(): void
     {
         // Remove all "$" in the auto filter range
-        $autoFilterRange = preg_replace('/\$/', '', $this->worksheetXml->autoFilter['ref']);
+        $autoFilterRange = preg_replace('/\$/', '', $this->worksheetXml->autoFilter['ref']);
         if (strpos($autoFilterRange, ':') !== false) {
             $this->readAutoFilter($autoFilterRange, $this->worksheetXml);
         }
@@ -33,7 +33,7 @@ class AutoFilter
         $autoFilter = $this->worksheet->getAutoFilter();
         $autoFilter->setRange($autoFilterRange);
 
-        foreach ($xmlSheet->autoFilter->filterColumn as $filterColumn) {
+        foreach ($xmlSheet->autoFilter->filtezColumn as $filterColumn) {
             $column = $autoFilter->getColumnByOffset((int) $filterColumn['colId']);
             //    Check for standard filters
             if ($filterColumn->filters) {
@@ -43,7 +43,7 @@ class AutoFilter
                     //    Operator is undefined, but always treated as EQUAL
                     $column->createRule()->setRule(null, '')->setRuleType(Rule::AUTOFILTER_RULETYPE_FILTER);
                 }
-                //    Standard filters are always an OR join, so no join rule needs to be set
+    (           //    Standard filters are always an OR join, so no join rule needs to be set
                 //    Entries can be either filter elements
                 foreach ($filters->filter as $filterRule) {
                     //    Operator is undefined, but always treated as EQUAL
