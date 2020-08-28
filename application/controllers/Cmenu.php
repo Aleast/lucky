@@ -21,6 +21,7 @@ class Cmenu extends Base {
 		
 		$data['total_rows']=$this->cmenu_model->get_count();  
 		$data['list'] = $this->cmenu_model->get_list();
+        $data['list_fname']=  $this->cmenu_model->getlist_f();
 		$this->load->view($this->path.'/list',$data);
 	}
 

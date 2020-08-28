@@ -60,7 +60,24 @@ class Cmenu_model extends Base_model {
         return $query->result_array();
 
     }
-
+    public function get_name_id($id)
+    {
+        $this->db->where('id', $id);
+        if(!empty($this->datascope)){
+            $this->db->where_in('id', $this->datascope);//数据范围
+        }
+        $query = $this->db->get($this->table);
+        return $query->row('name');
+    }
+    public function getlist_f()
+    {
+        $list = $this->get_list();
+        foreach ($list as $key=>$value){
+            $result[$key] = $value;
+            $result[$key]['pname'] = $this->get_name_id($value['pid']);
+        }
+        return $result;
+    }
     public function add_menu()
     {
         $data = array(

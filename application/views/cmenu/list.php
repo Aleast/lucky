@@ -82,7 +82,7 @@
                           <th>ID</th>
                           <th>菜单名称</th>
                           <th>菜单链接</th>
-                         <th>Pid(*0为父菜单，数字意为父菜单相同ID的子菜单)</th>
+                          <th>上级菜单</th>
                           <!-- <th>状态</th> -->
                           
                           <th>操作</th>
@@ -90,13 +90,13 @@
                       </thead>
                       <tbody>
 
-                      <?php foreach ($list as $item): ?>
+                      <?php foreach ($list_fname as $item): ?>
                         <tr>
                           <td><?=$item['id']?></td>
                           <td><?=$item['name']?></td>
                           
                           <td> <?=$item['url']?></td>
-                          <td> <?=$item['pid']?></td>
+                          <td> <?php if(empty($item['pname'])){ echo" 无"; }else{ echo $item['pname']; }?></td>
                          <td>
                              <label class="badge badge-info" onclick="x_admin_show('编辑','/cmenu/edit?id=<?=$item['id']?>',600,400)">编辑</label>
                              <label class="badge badge-warning" onclick="member_del(this,<?=$item['id']?>)">删除</label>
