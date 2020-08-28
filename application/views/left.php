@@ -16,7 +16,7 @@
           <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="/rl?pages=1&limit=10">客户信息</a></li>
             <!-- <li class="nav-item"> <a class="nav-link" href="/member?pages=1&limit=10">管理员信息</a></li> -->
-          
+
           </ul>
         </div>
       </li>
@@ -36,7 +36,7 @@
           </ul>
         </div>
       </li>
-      
+
       <!-- <li class="nav-item">
         <a class="nav-link" href="/wxuser?pages=1&limit=10">
           <i class="mdi mdi-view-headline menu-icon"></i>
@@ -63,7 +63,7 @@
       </li> -->
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-          <i class="mdi mdi-account menu-icon"></i>
+<!--          <i class="mdi mdi-account menu-icon"></i>-->
           <span class="menu-title">系统设置</span>
           <i class="menu-arrow"></i>
         </a>
@@ -77,7 +77,7 @@
           </ul> -->
         </div>
       </li>
-      
+
       <li class="nav-item">
         <a class="nav-link" href="#">
           <i class="mdi mdi-file-document-box-outline menu-icon"></i>

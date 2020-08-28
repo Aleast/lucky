@@ -71,6 +71,27 @@
               
              
           </div>
+            <div class="layui-form-item">
+                <label for="L_deptid" class="layui-form-label">
+                    <span class="x-red">*</span>设置角色权限
+                </label>
+                <div class="layui-input-inline">
+                    <!-- <input type="text" id="L_mid" name="mid" required="" lay-verify="mid"
+                    autocomplete="off" class="layui-input"> -->
+
+                    <select name="deptid" id="L_deptid" lay-verify="required" class="layui-input">
+                        <option value="">请选择角色权限</option>
+
+                        <?php foreach ($role_info as $item): ?>
+                            <option value="<?=$item['id']?>"><?=$item['name']?></option>
+                        <?php endforeach;?>
+
+                    </select>
+
+                </div>
+
+
+            </div>
 
           <div class="layui-form-item">
               <label for="L_is_manager" class="layui-form-label">

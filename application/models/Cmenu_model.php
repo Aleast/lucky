@@ -148,6 +148,40 @@ class Cmenu_model extends Base_model {
         return $query->result_array();
         
     }
+    public function get_order_f_list()
+    {
+
+        $this->db->where('menu.is_del', "0");//0没有删除
+        if(!empty($this->datascope)){
+            $this->db->where_in('menu.id', $this->datascope);//数据范围
+        }
+        $this->db->where('menu.pid', "0");
+        $this->db->order_by('order desc');
+
+        $query = $this->db->get($this->table);
+        Dlog_model::save( $this->db->last_query() );
+
+
+        return $query->result_array();
+
+    }
+    public function get_order_s_list()
+    {
+
+        $this->db->where('menu.is_del', "0");//0没有删除
+        if(!empty($this->datascope)){
+            $this->db->where_in('menu.id', $this->datascope);//数据范围
+        }
+        $this->db->where('menu.pid >', "0");
+        $this->db->order_by('order desc');
+
+        $query = $this->db->get($this->table);
+        Dlog_model::save( $this->db->last_query() );
+
+
+        return $query->result_array();
+
+    }
 
 
     public function add_user()

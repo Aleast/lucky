@@ -78,6 +78,15 @@ class Role_model extends Base_model
         return $query->result_array();
 
     }
+    public function get_all_info()
+    {
+        $this->db->where('role.is_del', "0");//0没有删除
+        $this->db->order_by('role.id desc');//0没有删除
+        $query = $this->db->get($this->table);
+        Dlog_model::save( $this->db->last_query() );
+        return $query->result_array();
+
+    }
 
 
     public function add($insertdata)

@@ -10,6 +10,7 @@ class Manager extends Base {
         parent::__construct();
 		$this->load->model('manager_model');
         $this->load->model('dept_model');
+        $this->load->model('role_model');
 		
 		// $this->load->helper('url_helper');
         // $this->load->library('session');
@@ -26,6 +27,7 @@ class Manager extends Base {
 	public function add()
 	{
 		$data['deptids'] = $this->dept_model->get_list();
+        $data['role_info'] = $this->role_model->get_all_info();
 
 		$this->load->view($this->path.'/add',$data);
 	}
@@ -71,7 +73,8 @@ class Manager extends Base {
 	{
 		$data['info'] = $this->manager_model->getinfo();
 		$data['deptids'] = $this->dept_model->get_list();
-
+        $data['role_info'] = $this->role_model->get_all_info();
+//        var_dump($data['role_info']);die();
 		$this->load->view($this->path.'/edit',$data);
 	}
 	public function update()
