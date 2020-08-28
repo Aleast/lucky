@@ -64,38 +64,12 @@ class Cmenu_model extends Base_model {
     public function add_menu()
     {
         $data = array(
-            'id' => $this->input->post_get('id', true),
             'name' => $this->input->post_get('name', true),
-            'm_id' => $this->input->post_get('M_id', true),
-            'm_menu' => $this->input->post_get('M_menu', true)
+            'url' => $this->input->post_get('url', true),
+            'pid' => $this->input->post_get('pid', true)
         );
-        //m_menu字段从key判断0-3，key下值为空的赋值0，key不为空的赋值1
-        $count = count($data['m_id'])*4;
 
-        for($i = 0;$i<$count;$i++){
-            if(isset($data['m_menu'][$i])){
-                $data['m_menu'][$i] = "1";
-            }else{
-                $data['m_menu'][$i] = "0";
-            }
-        }
-        ksort($data['m_menu']);
-        $m_menu = implode($data['m_menu']);
-        $m_menu = $this->splitStrWithComma($m_menu);
-        $m_menu_arr = explode(",",$m_menu);
-        $count_cmenu = count($data['m_id']);
-        //此处是否需要强制类型转换以达到 [{"id":2,"role":0111},{"id":3,"role":1101}] 存入类型？？？
-        for ($i = 0;$i<$count_cmenu;$i++){
-            $cmenu[$i] = array(
-                "id" => $data['m_id'][$i],
-                "role" => $m_menu_arr[$i]
-            );
-        }
-        $data_cmenu['name'] = $data['name'];
-        $data_cmenu['menu'] = json_encode($role);
-        $data_cmenu['addtime'] = time();
-
-        $this->db->replace($this->table, $data_menu);
+        $this->db->replace($this->table, $data);
         // echo $this->db->last_query();
 
 
@@ -232,15 +206,16 @@ class Cmenu_model extends Base_model {
     public function update()
     {   
         $id=$this->input->post_get('id', TRUE);
-        if($this->has_exist_except('url',$id,$this->input->post_get('url', TRUE),$this->table)>0){
+        if($this->has_exist_except('name',$id,$this->input->post_get('name', TRUE),$this->table)>0){
             return -2;
         }
+        if($this->has_exist_except('url',$id,$this->input->post_get('url', TRUE),$this->table)>0){
+            return -3;
+        }
         $data = array(
+            'name' =>  $this->input->post_get('name', TRUE),
             'url' =>  $this->input->post_get('url', TRUE),
-            // 'deptid' =>  $this->input->post_get('deptid', TRUE),
-            'is_del' =>  $this->input->post_get('is_del', TRUE)
-            // 'phone' => $this->input->post_get('phone', TRUE)
-            
+            'pid' =>  $this->input->post_get('pid', TRUE)
         );
         // var_dump($data);exit;
           
@@ -299,6 +274,17 @@ class Cmenu_model extends Base_model {
 		return $query->row();
 
 	}
+    public function getinfo_f()
+    {
+        $this->db->where('pid', "0");
+        if(!empty($this->datascope)){
+            $this->db->where_in('id', $this->datascope);//数据范围
+        }
+        $query = $this->db->get($this->table);
+
+        return $query->result_array();
+
+    }
     
     
     public function get_userinfo()

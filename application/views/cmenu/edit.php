@@ -24,95 +24,53 @@
     <div class="x-body">
         <form class="layui-form">
             <div class="layui-form-item">
-              <label for="L_username" class="layui-form-label">
-                  <span class="x-red">*</span>用户名
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_username" name="username" required="" lay-verify="username"
-                  autocomplete="off" class="layui-input" value='<?=$info->username?>' readonly>
-              </div>     
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>用户名不可修改
-              </div>       
+                <label for="L_nickname" class="layui-form-label">
+                    <span class="x-red">*</span>菜单名称
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_nickname" name="name" required="" lay-verify="name"
+                           autocomplete="off" class="layui-input" value="<?=$info->name?>">
+                </div>
+
             </div>
 
             <div class="layui-form-item">
-              <label for="L_nickname" class="layui-form-label">
-                  <span class="x-red">*</span>昵称
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_nickname" name="nickname" required="" lay-verify="nickname"
-                  autocomplete="off" class="layui-input" value='<?=$info->nickname?>'>
-              </div>
-                          
+                <label for="L_nickname" class="layui-form-label">
+                    <span class="x-red">*</span>菜单链接
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_nickname" name="url" required="" lay-verify="name"
+                           autocomplete="off" class="layui-input" value="<?=$info->url?>">
+                </div>
+
             </div>
-        
-          
-          <?php if ($info->id != $_SESSION['mid']): ?>
 
-          <div class="layui-form-item">
-              <label for="L_deptid" class="layui-form-label">
-                  <span class="x-red">*</span>所属部门
-              </label>
-              <div class="layui-input-inline">
-                  <!-- <input type="text" id="L_mid" name="mid" required="" lay-verify="mid"
-                  autocomplete="off" class="layui-input"> -->
 
-                  <select name="deptid" id="L_deptid" lay-verify="required" class="layui-input">
-                        <option value="">请选择所属部门</option>
-                        
-                        <?php foreach ($deptids as $item): ?>
-                        <option value="<?=$item['id']?>"
-                        <?php if ($item['id'] === $info->deptid): ?>
-                            selected
-                         <?php endif; ?>
-                        ><?php echo str_repeat('---',$item['level'])?><?=$item['name']?></option>
-                        <?php endforeach;?>  
-                      
-                  </select>
+            <div class="layui-form-item">
+                <label for="L_deptid" class="layui-form-label">
+                    <span class="x-red">*</span>上级菜单
+                </label>
+                <div class="layui-input-inline">
+                    <!-- <input type="text" id="L_mid" name="mid" required="" lay-verify="mid"
+                    autocomplete="off" class="layui-input"> -->
 
-              </div>
-              
-             
-          </div>
-          <div class="layui-form-item">
-              <label for="L_is_manager" class="layui-form-label">
-                  <span class="x-red">*</span>查看范围
-              </label>
-              <!-- <div class="layui-input-inline">
-                  <input type="text" id="L_is_manager" name="is_manager" required="" lay-verify="is_manager"
-                  autocomplete="off" class="layui-input">
-              </div> -->
-              <div class="layui-input-inline">
+                    <select name="pid" id="L_deptid" lay-verify="required" class="layui-input">
+                        <option value="0">请选择所属部门</option>
 
-                <input type="radio" name="is_manager" value="0" title="个人" class="layui-input" <?php if ($info->is_manager == '1'): ?>checked<?php endif; ?>>
-                <input type="radio" name="is_manager" value="1" title="部门" class="layui-input" <?php if ($info->is_manager == '1'): ?>checked<?php endif; ?>>
-              </div>
-          </div>
+                        <option value="">请选择上级部门</option>
 
-          <?php endif; ?>
-          <!-- 
-          <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>密码
-              </label>
-              <div class="layui-input-inline">
-                  <input type="password" id="L_pass" name="pass" required="" lay-verify="pass"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  6到16个字符
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_repass" class="layui-form-label">
-                  <span class="x-red">*</span>确认密码
-              </label>
-              <div class="layui-input-inline">
-                  <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
-                  autocomplete="off" class="layui-input">
-              </div>
-          </div>-->
+                        <?php foreach ($menu_f as $item): ?>
+                            <option value="<?=$item['id']?>"
+                                <?php if ($item['id'] === $info->pid): ?>
+                                    selected
+                                <?php endif; ?>
+                            ><?=$item['name']?></option>
+                        <?php endforeach;?>
+
+                    </select>
+
+                </div>
+            </div>
           <input type="hidden" name="id" value="<?=$info->id?>">
 
           <div class="layui-form-item">
@@ -155,7 +113,7 @@
           console.log(param);
           var strObj = eval("(" + param + ")");
           $.ajax({
-              url:"/manager/update",
+              url:"/cmenu/update",
               type:'get',//method请求方式，get或者post
               dataType:'json',//预期服务器返回的数据类型
               data:strObj,//表格数据序列化

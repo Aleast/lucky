@@ -26,8 +26,8 @@ class Cmenu extends Base {
 
 	public function add()
     {
-        $data['menu']=  $this->menu_model->getallname();
-//        var_dump($data['menu']); die();
+        $data['menu_f']=  $this->cmenu_model->getinfo_f();
+//        var_dump($data['menu_f']); die();
         $this->load->view($this->path.'/add',$data);
     }
     public function addone()
@@ -46,16 +46,16 @@ class Cmenu extends Base {
 
 
 	
-	// public function delall()
-	// {
+	 public function delall()
+	 {
 	    
-	//     if($this->menu_model->del_user()>0){
-	//         $data['status']="true";
-	//     }else{
-	//         $data['status']="操作失败";
-	//     }
-	//     echo json_encode($data);
-	// }
+	     if($this->cmenu_model->del_user()>0){
+	         $data['status']="true";
+	     }else{
+	         $data['status']="操作失败";
+	     }
+	     echo json_encode($data);
+	 }
 	
 	// public function setuse()
 	// {
@@ -71,19 +71,23 @@ class Cmenu extends Base {
 	
 	public function edit()
 	{
-		$data['info'] = $this->menu_model->getinfo();
-		// $data['deptids'] = $this->dept_model->get_list();
+		$data['info'] = $this->cmenu_model->getinfo();
+        $data['menu_f']=  $this->cmenu_model->getinfo_f();
+//        var_dump($data['menu_f']); die();
 
 		$this->load->view($this->path.'/edit',$data);
 	}
 	public function update()
 	{
 	    // echo $this->input->post_get('is_manager', TRUE);exit;
+//        var_dump($this->cmenu_model->update());die();
 	    if($this->cmenu_model->update()>0){
 	        $data['status']="true";
 	    }elseif($this->cmenu_model->update()==-2){
 	        $data['status']="名称已存在";
-		}else{
+		}elseif($this->cmenu_model->update()==-3){
+            $data['status']="链接已存在";
+        }else{
 	        $data['status']="操作失败";
 	    }
 	    echo json_encode($data);

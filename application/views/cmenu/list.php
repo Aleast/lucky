@@ -55,12 +55,9 @@
                   <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
                     <i class="mdi mdi-clock-outline text-muted"></i>
                   </button> -->
-
-                  <!-- <?php if($_SESSION['is_del']==1){?>
-                  <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0" onclick="x_admin_show('新增','/cmenu/add?>',600,400)">
-                    <i class="mdi mdi-plus text-muted"></i>
-                  </button>
-                  <?php }?> -->
+                    <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0" onclick="x_admin_show('新增','/cmenu/add?>',600,400)">
+                        <i class="mdi mdi-plus text-muted"></i>
+                    </button>
 
                   <!-- <button class="btn btn-primary mt-2 mt-xl-0">Download report</button> -->
                 </div>
@@ -84,9 +81,6 @@
                         <tr>
                           <th>ID</th>
                           <th>菜单名称</th>
-                         
-                         
-                          
                           <th>菜单链接</th>
                          <th>Pid(*0为父菜单，数字意为父菜单相同ID的子菜单)</th>
                           <!-- <th>状态</th> -->
@@ -103,69 +97,12 @@
                           
                           <td> <?=$item['url']?></td>
                           <td> <?=$item['pid']?></td>
-                         <td> <label class="badge badge-info" onclick="x_admin_show('编辑','/cmenu/edit?id=<?=$item['id']?>',600,400)">编辑</label>
-
-</td>
-
-
-
-
-
-
-
-                        <!--=======================================  -->
-                          <!-- <td> 
-                          <?php if($_SESSION['is_manager']==1 && $item['id']!=$_SESSION['mid']){?>
-                          
-                          
-                          <?php if ($item['is_use'] === '0'): ?>
-
-                            <label class="badge badge-danger" onclick="stop(this,<?=$item['id']?>)">已停用</label>
-
-<?php elseif ($item['is_use'] === '1'): ?>
-
-  <label class="badge badge-success" onclick="stop(this,<?=$item['id']?>)">已启用</label>
-
-<?php else: ?>
-  <label class="badge badge-danger" >未知</label>
-
-<?php endif; ?>
-
-<?php }else{?>
-
---
-<?php }?>
-</td>
-
-
-<td>
-<label class="badge badge-success" onclick="x_admin_show('修改密码','/manager/cpass?id=<?=$item['id']?>',600,400)">修改密码</label>
-
-<?php if($_SESSION['is_manager']==1 && $item['id']!=$_SESSION['mid']){?>
-
-  <label class="badge badge-info" onclick="x_admin_show('编辑','/manager/edit?id=<?=$item['id']?>',600,400)">编辑</label>
-
-              <label class="badge badge-warning" onclick="member_del(this,<?=$item['id']?>)">删除</label>
-<?php }?>
-
-            </td> -->
-
-    
-<!-- ====================================================================================== -->
-
-
-
-
-
-
-
-
-
-
-
+                         <td>
+                             <label class="badge badge-info" onclick="x_admin_show('编辑','/cmenu/edit?id=<?=$item['id']?>',600,400)">编辑</label>
+                             <label class="badge badge-warning" onclick="member_del(this,<?=$item['id']?>)">删除</label>
+                         </td>
                         </tr>
- <?php endforeach;?>           
-                        
+                     <?php endforeach;?>
                       </tbody>
                     </table>
                     <div id="pages"></div>
@@ -173,12 +110,6 @@
                 </div>
               </div>
             </div>
-      
-
-          
-
-
-                       
         <!-- content-wrapper ends -->
         <!-- partial:/static/partials/_footer.html -->
         <?php @$this->load->view("footer");?>
@@ -190,7 +121,7 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  
+
 
     <!-- container-scroller -->
   <!-- plugins:js -->
@@ -254,60 +185,6 @@
         });
       });
 
-       /*用户-停用*/
-      function stop(obj,id){
-          layer.confirm('确认要操作吗？',function(index){
-
-			  //var strObj = eval("(" + {"id":id} + ")");
-			  var strObj={"id":id}
-
-			  console.log(strObj);
-        	  $.ajax({
-                  url:"/manager/setuse",
-                  type:'get',//method请求方式，get或者post
-                  dataType:'json',//预期服务器返回的数据类型
-                  data:strObj,//表格数据序列化
-                  contentType: "application/json; charset=utf-8",
-              success:function(data){//res为相应体,function为回调函数
-                  
-                   
-                  if(data.status=="true"){
-                  	 	
-                	  if($(obj).html()=='已启用'){
-
-                        
-
-                          $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('停用');
-                         // layer.msg('已停用!',{icon: 5,time:1000});
-
-                        }else{
-                       
-
-                          $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('启用');
-                         // layer.msg('已启用!',{icon: 5,time:1000});
-                        }
-                      location.reload();
-                	  
-                   
-                  }else{
-                       layer.alert(data.status,{icon: 5});
-                  }
-              },
-              error:function(){
-
-                  layer.alert('操作失败！！！',{icon:5});
-              }
-       });
-
-
-              
-              
-
-
-              
-              
-          });
-      }
 
       /*用户-删除*/
       function member_del(obj,id){
@@ -316,7 +193,7 @@
         	  strObj={"dellist":id}
               //发异步删除数据
                  $.ajax({
-                        url:"/manager/delall",
+                        url:"/cmenu/delall",
                         type:'get',//method请求方式，get或者post
                         dataType:'json',//预期服务器返回的数据类型
                         data:strObj,//表格数据序列化
@@ -341,45 +218,5 @@
           });
       }
 
-
-
-      function delAll (argument) {
-
-        var data = tableCheck.getData();
-        strObj={"dellist":data}
-        
-        layer.confirm('确认要删除吗？'+data,function(index){
-            //捉到所有被选中的，发异步进行删除
-            
-             $.ajax({
-                        url:"/manager/delall",
-                        type:'get',//method请求方式，get或者post
-                        dataType:'json',//预期服务器返回的数据类型
-                        data:strObj,//表格数据序列化
-                        contentType: "application/json; charset=utf-8",
-                    success:function(data){//res为相应体,function为回调函数
-                        
-                         //return false;
-                        if(data.status=="true"){
-                        	 layer.msg('删除成功', {icon: 1});
-                             $(".layui-form-checked").not('.header').parents('tr').remove();
-                         
-                        }else{
-                             layer.alert(data.status,{icon: 5});
-                        }
-                    },
-                    error:function(){
-                        layer.alert('操作失败！！！',{icon:5});
-                    }
-             });
-            
-            
-           
-
-
-
-            
-        });
-      }
     </script>
 </html>

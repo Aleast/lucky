@@ -23,27 +23,24 @@
   <body>
     <div class="x-body">
         <form class="layui-form">
-        
-          <div class="layui-form-item">
-              <label for="L_username" class="layui-form-label">
-                  <span class="x-red">*</span>用户名
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_username" name="username" required="" lay-verify="username"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>用户名新增后不可修改
-              </div>
-             
-          </div>
+
+            <div class="layui-form-item">
+                <label for="L_nickname" class="layui-form-label">
+                    <span class="x-red">*</span>菜单名称
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_nickname" name="name" required="" lay-verify="name"
+                           autocomplete="off" class="layui-input">
+                </div>
+
+            </div>
 
           <div class="layui-form-item">
               <label for="L_nickname" class="layui-form-label">
-                  <span class="x-red">*</span>昵称
+                  <span class="x-red">*</span>菜单链接
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="L_nickname" name="nickname" required="" lay-verify="nickname"
+                  <input type="text" id="L_nickname" name="url" required="" lay-verify="name"
                   autocomplete="off" class="layui-input">
               </div>
              
@@ -52,81 +49,21 @@
 
           <div class="layui-form-item">
               <label for="L_deptid" class="layui-form-label">
-                  <span class="x-red">*</span>所属部门
+                  <span class="x-red">*</span>上级菜单
               </label>
               <div class="layui-input-inline">
                   <!-- <input type="text" id="L_mid" name="mid" required="" lay-verify="mid"
                   autocomplete="off" class="layui-input"> -->
 
-                  <select name="deptid" id="L_deptid" lay-verify="required" class="layui-input">
-                        <option value="">请选择所属部门</option>
+                  <select name="pid" id="L_deptid" lay-verify="required" class="layui-input">
+                        <option value="0">请选择所属部门</option>
                         
-                        <?php foreach ($deptids as $item): ?>
-                        <option value="<?=$item['id']?>"><?php echo str_repeat('---',$item['level'])?><?=$item['name']?></option>
+                        <?php foreach ($menu_f as $item): ?>
+                        <option value="<?=$item['id']?>"><?=$item['name']?></option>
                         <?php endforeach;?>  
                       
                   </select>
 
-              </div>
-              
-             
-          </div>
-
-          <div class="layui-form-item">
-              <label for="L_is_manager" class="layui-form-label">
-                  <span class="x-red">*</span>查看范围
-              </label>
-              <!-- <div class="layui-input-inline">
-                  <input type="text" id="L_is_manager" name="is_manager" required="" lay-verify="is_manager"
-                  autocomplete="off" class="layui-input">
-              </div> -->
-              <div class="layui-input-inline">
-                <!-- <input type="checkbox" name="is_manager" value=1 lay-skin="switch" lay-text="部门|个人" class="layui-input"> -->
-                <input type="radio" name="is_manager" value="0" title="个人" checked class="layui-input">
-                <input type="radio" name="is_manager" value="1" title="部门" class="layui-input">
-              </div>
-          </div>
-         
-           <!-- <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red">*</span>邮箱
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="email" required="" lay-verify="email"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>将会成为您唯一的登入名
-              </div>
-          </div> -->
-          <!-- <div class="layui-form-item">
-              <label for="L_phone" class="layui-form-label">
-                  <span class="x-red">*</span>电话
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_phone" name="phone" required="" lay-verify="phone"
-                  autocomplete="off" class="layui-input">
-              </div>
-          </div> -->
-          <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>密码
-              </label>
-              <div class="layui-input-inline">
-                  <input type="password" id="L_pass" name="pass" required="" lay-verify="pass"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  6到16个字符
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_repass" class="layui-form-label">
-                  <span class="x-red">*</span>确认密码
-              </label>
-              <div class="layui-input-inline">
-                  <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
-                  autocomplete="off" class="layui-input">
               </div>
           </div>
           <div class="layui-form-item">
@@ -145,24 +82,24 @@
           ,layer = layui.layer;
         
           //自定义验证规则
-          form.verify({
-            username: function(value){
-              if(value.length < 4){
-                return '用户名至少得4个字符';
-              }
-            }
-            ,nickname: function(value){
-              if(value.length < 2){
-                return '昵称至少得2个字符';
-              }
-            }
-            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-            ,repass: function(value){
-                if($('#L_pass').val()!=$('#L_repass').val()){
-                    return '两次密码不一致';
-                }
-            }
-          });
+          // form.verify({
+          //   username: function(value){
+          //     if(value.length < 4){
+          //       return '用户名至少得4个字符';
+          //     }
+          //   }
+          //   ,nickname: function(value){
+          //     if(value.length < 2){
+          //       return '昵称至少得2个字符';
+          //     }
+          //   }
+          //   ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+          //   ,repass: function(value){
+          //       if($('#L_pass').val()!=$('#L_repass').val()){
+          //           return '两次密码不一致';
+          //       }
+          //   }
+          // });
 
           //监听提交
           form.on('submit(add)', function(data){
@@ -173,7 +110,7 @@
               
 
         	  $.ajax({
-                  url:"/manager/addone",
+                  url:"/cmenu/addone",
                   type:'get',//method请求方式，get或者post
                   dataType:'json',//预期服务器返回的数据类型
                   data:strObj,//表格数据序列化
