@@ -103,15 +103,67 @@ class Rl extends Base {
 	public function exportdata(){
 
 		// echo 'export';
-		$data['list'] = $this->rl_model->getExportData();
-		// echo '<pre>';
-		// var_dump($exportData);
+		$list = $this->rl_model->getExportData();
+        $this->load->library('PHPExcel');
+        $this->load->library('PHPExcel/IOFactory');
 
-		// echo '<pre>';
-		$this->load->view($this->path.'/exportdata',$data);
+        $objPHPExcel = new PHPExcel();
+        // 设置sheet标签
+        $objPHPExcel->setActiveSheetIndex(0);
+        // 设置sheet的name
+        $objPHPExcel->getActiveSheet()->setTitle('测试sheet');
 
+        // 合并单元格
+        $objPHPExcel->getActiveSheet()->mergeCells('A1:F1');
+        // 设置行高
+        $objPHPExcel->getActiveSheet()->getRowDimension('1')->setRowHeight(40);
+        // 设置列宽
+        $objPHPExcel->getActiveSheet()->getDefaultColumnDimension()->setWidth(18);
 
+        // 自动行高
+        $objPHPExcel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
 
+        // 设置水平居中
+        $objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        //设置垂直居中
+        $objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+        // 设置加粗
+        $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+
+        //设置当前的sheet
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', '导出测试excel样式及内容');
+        $objPHPExcel->getActiveSheet()->setCellValue('A2', '电话');
+        $objPHPExcel->getActiveSheet()->setCellValue('B2', '商城ID');
+        $objPHPExcel->getActiveSheet()->setCellValue('C2', '归属员工');
+        $objPHPExcel->getActiveSheet()->setCellValue('D2', '员工昵称');
+        $objPHPExcel->getActiveSheet()->setCellValue('E2', '归属部门');
+        $objPHPExcel->getActiveSheet()->setCellValue('F2', '创建时间');
+
+//        var_dump($list);die();
+        foreach($list as $key => $value){
+            // 设置行高
+            $num = $key+3;
+            $objPHPExcel->getActiveSheet()->getRowDimension($num)->setRowHeight(45);
+            $objPHPExcel->getActiveSheet()->setCellValue('A' . $num, $value['cphone']);
+            $objPHPExcel->getActiveSheet()->setCellValue('B' . $num, $value['cid']);
+            $objPHPExcel->getActiveSheet()->setCellValue('C' . $num, $value['username']);
+            $objPHPExcel->getActiveSheet()->setCellValue('D' . $num, $value['nickname']);
+            $objPHPExcel->getActiveSheet()->setCellValue('E' . $num, $value['deptname']);
+            $objPHPExcel->getActiveSheet()->setCellValue('F' . $num, date("Y-m-d H:i:s",$value['addtime']));
+        }
+        $outputFileName = time().".xls";
+        $xlsWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
+        header("Content-Type: application/force-download");
+        header("Content-Type: application/octet-stream");
+        header("Content-Type: application/download");
+        header('Content-Disposition:inline;filename="'.$outputFileName.'"');
+        header("Content-Transfer-Encoding: binary");
+        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+        header("Pragma: no-cache");
+        $xlsWriter->save( "php://output" );
 	}
 	
 	
