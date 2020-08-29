@@ -259,7 +259,7 @@
         	  strObj={"dellist":id}
               //发异步删除数据
                  $.ajax({
-                        url:"/member/delall",
+                        url:"/message/delall",
                         type:'get',//method请求方式，get或者post
                         dataType:'json',//预期服务器返回的数据类型
                         data:strObj,//表格数据序列化
@@ -295,7 +295,7 @@
             //捉到所有被选中的，发异步进行删除
             
              $.ajax({
-                        url:"/member/delall",
+                        url:"/message/delall",
                         type:'get',//method请求方式，get或者post
                         dataType:'json',//预期服务器返回的数据类型
                         data:strObj,//表格数据序列化
