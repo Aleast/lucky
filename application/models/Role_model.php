@@ -239,7 +239,17 @@ class Role_model extends Base_model
         return $query->row();
 
     }
+    public function get_id_role($id)
+    {
 
+        $this->db->where('id', $id);
+        if(!empty($this->datascope)){
+            $this->db->where_in('mid', $this->datascope);//数据范围
+        }
+        $query = $this->db->get($this->table);
+        return $query->row_array();
+
+    }
 
 
     public function info()

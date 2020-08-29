@@ -325,6 +325,19 @@ class Cmenu_model extends Base_model {
 		return $query->row();
 
 	}
+
+    public function get_id_name($name)
+    {
+        $this->db->where('name', $name);
+        if(!empty($this->datascope)){
+            $this->db->where_in('id', $this->datascope);//数据范围
+        }
+        $query = $this->db->get($this->table);
+
+        $result = $query->row_array();
+        return  $result['id'];
+
+    }
     public function getinfo_f()
     {
         $this->db->where('pid', "0");

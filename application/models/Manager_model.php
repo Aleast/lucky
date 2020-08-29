@@ -238,6 +238,17 @@ class Manager_model extends Base_model {
         return $query->row();
         
     }
+    public function get_id_role($id)
+    {
+        $this->db->where('id', $id);
+        if(!empty($this->datascope)){
+            $this->db->where_in('id', $this->datascope);//数据范围
+        }
+        $query = $this->db->get($this->table);
+
+        return $query->row_array();
+
+    }
 
     public function get_user_by_invitecode($invitecode){
         $this->db->where('invitecode', $invitecode);
