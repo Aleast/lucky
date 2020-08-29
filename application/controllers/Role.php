@@ -19,6 +19,11 @@ class Role extends Base {
 
     public function index()
     {
+        $menu_name = "权限管理";
+        $where_role = "3";//1001,增删改查
+        if($this->if_role($menu_name,$where_role) != 1){
+            $this->load->view('404');
+        }
         // echo $this->config->item("base_url");exit;
         // var_dump($this->session->get_userdata());exit;
         $data['total_rows']=$this->role_model->get_count();    //总的内容 条数
@@ -29,6 +34,11 @@ class Role extends Base {
 
     public function add()
     {
+        $menu_name = "权限管理";
+        $where_role = "0";//1001,增删改查
+        if($this->if_role($menu_name,$where_role) != 1){
+            echo "权限不足!";die();
+        }
         $data['menu']=  $this->menu_model->getallname();
 //        var_dump($data['menu']); die();
         $this->load->view($this->path.'/add',$data);
@@ -60,6 +70,11 @@ class Role extends Base {
     }
     public function edit()
     {
+        $menu_name = "权限管理";
+        $where_role = "2";//1001,增删改查
+        if($this->if_role($menu_name,$where_role) != 1){
+            echo "权限不足!";die();
+        }
         $data['info'] = $this->role_model->getinfo();
         $data['menu'] = $this->role_model->object_to_array($data['info'],true);
         $menu = $this->role_model->simple_json_parser($data['menu']['menu']);
@@ -88,11 +103,16 @@ class Role extends Base {
 
     public function delall()
     {
-
-        if($this->role_model->del()>0){
-            $data['status']="true";
-        }else{
-            $data['status']="操作失败";
+        $menu_name = "权限管理";
+        $where_role = "1";//1001,增删改查
+        if($this->if_role($menu_name,$where_role) != 1){
+            $data['status'] = "权限不足";
+        }else {
+            if ($this->role_model->del() > 0) {
+                $data['status'] = "true";
+            } else {
+                $data['status'] = "操作失败";
+            }
         }
         echo json_encode($data);
     }

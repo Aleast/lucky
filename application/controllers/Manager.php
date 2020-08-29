@@ -19,6 +19,11 @@ class Manager extends Base {
 
 	public function index()
 	{
+        $menu_name = "管理员信息";
+        $where_role = "3";//1001,增删改查
+        if($this->if_role($menu_name,$where_role) == 1){
+            $this->load->view('404');
+        }
 		$data['total_rows']=$this->manager_model->get_count();  
 		$data['list'] = $this->manager_model->get_user();
 		$this->load->view($this->path.'/list',$data);
@@ -26,6 +31,11 @@ class Manager extends Base {
 
 	public function add()
 	{
+        $menu_name = "管理员信息";
+        $where_role = "0";//1001,增删改查
+        if($this->if_role($menu_name,$where_role) != 1){
+            echo "权限不足!";die();
+        }
 		$data['deptids'] = $this->dept_model->get_list();
         $data['role_info'] = $this->role_model->get_all_info();
 
@@ -48,12 +58,17 @@ class Manager extends Base {
 	
 	public function delall()
 	{
-	    
-	    if($this->manager_model->del_user()>0){
-	        $data['status']="true";
-	    }else{
-	        $data['status']="操作失败";
-	    }
+        $menu_name = "管理员信息";
+        $where_role = "1";//1001,增删改查
+        if($this->if_role($menu_name,$where_role) != 1){
+            $data['status'] = "权限不足";
+        }else {
+            if ($this->manager_model->del_user() > 0) {
+                $data['status'] = "true";
+            } else {
+                $data['status'] = "操作失败";
+            }
+        }
 	    echo json_encode($data);
 	}
 	
@@ -71,6 +86,11 @@ class Manager extends Base {
 	
 	public function edit()
 	{
+        $menu_name = "管理员信息";
+        $where_role = "2";//1001,增删改查
+        if($this->if_role($menu_name,$where_role) != 1){
+            echo "权限不足!";die();
+        }
 		$data['info'] = $this->manager_model->getinfo();
 		$data['deptids'] = $this->dept_model->get_list();
         $data['role_info'] = $this->role_model->get_all_info();

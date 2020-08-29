@@ -63,7 +63,7 @@
       </li> -->
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-<!--          <i class="mdi mdi-account menu-icon"></i>-->
+          <i class="mdi mdi-account menu-icon"></i>
           <span class="menu-title">系统设置</span>
           <i class="menu-arrow"></i>
         </a>

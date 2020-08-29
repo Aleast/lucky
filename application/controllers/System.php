@@ -15,7 +15,11 @@ class System extends Base {
 
 	public function index()
 	{
-
+        $menu_name = "系统设置";
+        $where_role = "3";//1001,增删改查
+        if($this->if_role($menu_name,$where_role) != 1){
+            $this->load->view('404');
+        }
 		$data['info'] = $this->system_model->getinfo();
 		$this->load->view($this->path.'/edit',$data);
 
@@ -63,6 +67,11 @@ class System extends Base {
 	public function update()
 	{
 
+        $menu_name = "系统设置";
+        $where_role = "2";//1001,增删改查
+        if($this->if_role($menu_name,$where_role) != 1){
+            $data['status']="权限不足";
+        }
 		if($this->system_model->update()>0){
 			$data['status']="true";
 		}else{

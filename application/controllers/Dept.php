@@ -17,7 +17,12 @@ class Dept extends Base {
     }
 
 	public function index()
-	{	
+	{
+        $menu_name = "部门管理";
+        $where_role = "3";//1001,增删改查
+        if($this->if_role($menu_name,$where_role) != 1){
+            $this->load->view('404');
+        }
 		// echo $this->config->item("base_url");exit;
 		// var_dump($this->session->get_userdata());exit;
 		$data['total_rows']=$this->dept_model->get_count();    //总的内容 条数
@@ -32,6 +37,11 @@ class Dept extends Base {
 
 	public function add()
 	{
+        $menu_name = "部门管理";
+        $where_role = "0";//1001,增删改查
+        if($this->if_role($menu_name,$where_role) != 1){
+            echo "权限不足!";die();
+        }
 		$data['pids'] = $this->dept_model->get_list();
 		// var_dump($mids);exit;
 		$this->load->view($this->path.'/add',$data);
@@ -73,6 +83,11 @@ class Dept extends Base {
 	}
 	public function edit()
 	{
+        $menu_name = "部门管理";
+        $where_role = "2";//1001,增删改查
+        if($this->if_role($menu_name,$where_role) != 1){
+            echo "权限不足!";die();
+        }
 		$data['info'] = $this->dept_model->getinfo();
 		// var_dump($data['info']->phone);exit;
 		$data['pids'] = $this->dept_model->get_list();
@@ -104,18 +119,23 @@ class Dept extends Base {
 
 	public function delall()
 	{
-	    
-	    if($this->dept_model->del()>0){
-	        $data['status']="true";
-		}elseif($this->dept_model->del()==-1){
-	        $data['status']="部门下仍有子部门，不能删除!";
+        $menu_name = "部门管理";
+        $where_role = "1";//1001,增删改查
+        if($this->if_role($menu_name,$where_role) != 1){
+            $data['status']="权限不足，不能删除!";
+        }else{
+            if($this->dept_model->del()>0){
+                $data['status']="true";
+            }elseif($this->dept_model->del()==-1){
+                $data['status']="部门下仍有子部门，不能删除!";
 
-		}elseif($this->dept_model->del()==-2){
-	        $data['status']="部门下仍有员工，不能删除!";
+            }elseif($this->dept_model->del()==-2){
+                $data['status']="部门下仍有员工，不能删除!";
 
-		}else{
-	        $data['status']="操作失败";
-	    }
+            }else{
+                $data['status']="操作失败";
+            }
+        }
 	    echo json_encode($data);
 	}
 	
