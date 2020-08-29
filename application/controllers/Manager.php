@@ -21,7 +21,7 @@ class Manager extends Base {
 	{
         $menu_name = "管理员信息";
         $where_role = "3";//1001,增删改查
-        if($this->if_role($menu_name,$where_role) == 1){
+        if($this->if_role($menu_name,$where_role) != 1){
             $this->load->view('404');
         }
 		$data['total_rows']=$this->manager_model->get_count();  
