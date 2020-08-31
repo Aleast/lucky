@@ -64,7 +64,7 @@
                             selected
                          <?php endif; ?>
                          
-                        ><?=$item['username']?></option>
+                        ><?=$item['username']?>｜<?=$item['nickname']?></option>
                         <?php endforeach;?>  
                       
                   </select>

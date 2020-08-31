@@ -68,7 +68,53 @@
       <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">客户信息</h4>
+
+
+                    <!-- <h4 class="card-title">客户信息</h4> -->
+                    <!-- <form class="layui-form" id="filterZone" action="">
+
+                    <div class="layui-form-item">
+                      <div class="layui-inline">
+
+                        <div class="layui-input-inline">
+                          <select lay-verify="required" lay-search="">
+                            <option value="0">商城ID</option>
+
+                          </select>
+                        </div>
+                      </div>
+                      <div class="layui-inline">
+                        <div class="layui-input-inline">
+                          <input type="text" name="cid" value=" <?=$_GET['cid']?>" autocomplete="off" class="layui-input">
+                        </div>
+                      </div>
+                      <div class="layui-inline">
+                      <button type="button" class="btn btn-light bg-white btn-icon" onclick="filterZoneSubmit()">
+                      <i class="mdi mdi-account-search text-muted"></i>
+                      </button>
+                    </div>
+                    </div>
+                  </form> -->
+
+                    <div id="simple-query">
+                        <!-- <h1>简单查询</h1> -->
+                        <div id="msg"></div>
+
+                        <!-- <div>请求参数json：</div>
+                        <div id="result1" style="word-break:break-all;height:60px;width:500px;padding-left:50px;"></div> -->
+                    </div>
+                    <script type="text/html" id="selectSex">
+                        <select>
+                            <option value=""></option>
+                            <option value="1">男</option>
+                            <option value="0">女</option>
+                        </select>
+                    </script>
+
+
+
+
+                    <!--                  <h4 class="card-title">客户信息</h4>-->
                   <!-- <p class="card-description">
                     Add class <code>.table</code>
                   </p> -->
@@ -172,10 +218,56 @@
 
 <script>
  
- layui.use(['laypage', 'layer'], function(){
-   var laypage = layui.laypage
-       ,layer = layui.layer;
-
+ // layui.use(['laypage', 'layer'], function(){
+ //   var laypage = layui.laypage
+ //       ,layer = layui.layer;
+ layui.config({
+     base: '/static/lib/layui/lay/modules/' //设定扩展的Layui模块的所在目录，一般用于外部模块扩展
+ }).extend({
+     dynamicCondition: 'dynamicCondition/dynamicCondition'
+ }).use(['laypage', 'layer','dynamicCondition'], function(){
+     var laypage = layui.laypage
+         ,layer = layui.layer,dynamicCondition = layui.dynamicCondition;
+     var dataFields = [{field:"cid",title:"商城ID",edit:"text",layVerify:"number"}
+         ,{field:"username",title:"归属员工",edit:"text"}
+         ,{field:"deptname",title:"归属部门",edit:"text"}
+         //  ,{field:"dept",title:"性别",edit:"select", templet:"#selectSex"}
+         //  ,{field:"birthday",title:"出生日期",edit:"date"}
+         ,{field:"cphone",title:"手机号码",edit:"text"}
+         // ,{field:"email",title:"邮箱",layVerify:"email"}
+     ];
+     //初始化动态条件查询实例
+     var dcInstance = dynamicCondition.create({fields : dataFields //通过json对象传入
+         //,tableId:"listTable"  //静态页面不好演示table数据表格更新
+         ,type:"simple"  //type:"simple"/"complex"
+         ,conditionTextId:"#msg"
+         ,extendBtns:function(btnDivJq, instance){  //扩展添加按钮
+             btnDivJq.append($('<a class="layui-btn " href="/rl?pages=1&limit=10">重置</a>'));
+         }
+         ,popupBtnsWidth: 350
+         ,popupShowQueryBtn: true
+         ,unpopupBtnswidth: 410
+         ,unpopupShowAddBtn: true
+         ,queryCallBack:function(requestData){
+             filterZoneSubmit(requestData);
+             // $("#result1").html(JSON.stringify(requestData));
+         }
+     });
+     <?php
+     $get = $_GET;
+     unset($get['pages']);
+     unset($get['limit']);
+     $condition='';
+     if(empty($get)){
+         $condition = '["cid",null,""]';
+     }else{
+         foreach($get as $k =>$v){
+             $condition = $condition?$condition.',["'.$k.'",null,"'.$v.'"]':'["'.$k.'",null,"'.$v.'"]';
+         }
+     }
+     // var_dump($get);
+     ?>
+     dcInstance.setCondition([<?=$condition?>]);
    //只显示上一页、下一页
    //完整功能
    laypage.render({

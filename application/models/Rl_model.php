@@ -45,6 +45,28 @@ class Rl_model extends Base_model
     {
         $pages = $this->input->post_get('pages', true);
         $limit = $this->input->post_get('limit', true);
+        $param = $this->input->get();
+        unset($param['pages']);
+        unset($param['limit']);
+        // var_dump($param);
+        if(!empty($param)){
+            foreach($param as $k =>$v){
+                if($k=='cphone'){
+                    $this->db->where('rl.'.$k.' like','%'.$v.'%');
+                }elseif($k=='username'){
+                    $this->db->group_start();
+                    // $this->db->where('manager.'.$k.' like','%'.$v.'%');
+                    $this->db->like('manager.'.$k,$v);
+                    $this->db->or_like('manager.nickname',$v);
+                    $this->db->group_end();
+                }elseif($k=='deptname'){
+                    $this->db->where('dept.name like','%'.$v.'%');
+                }else{
+                    $this->db->where('rl.'.$k,$v);
+                }
+            }
+        }
+        // exit;
 
         if(!$pages){
             $pages=1;

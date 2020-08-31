@@ -58,7 +58,7 @@
                         <option value="">请选择客户归属</option>
                         
                         <?php foreach ($mids as $item): ?>
-                        <option value="<?=$item['id']?>"><?=$item['username']?></option>
+                        <option value="<?=$item['id']?>"><?=$item['username']?>｜<?=$item['nickname']?></option>
                         <?php endforeach;?>  
                       
                   </select>
