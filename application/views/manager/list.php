@@ -89,6 +89,7 @@
                           <th>加入时间</th>
                           <th>注册链接</th>
                           <th>所属部门</th>
+                          <th>角色</th>
                           <th>查看范围</th>
                           <th>状态</th>
                           
@@ -107,6 +108,7 @@
                           <td> <?=$item['addtime']?></td>
                           <td> https://www.rpmore.com/?/mobile/user/register&invitecode=<?=$item['invitecode']?></td>
                           <td><?=$item['deptname']?></td>
+                          <td><?=$item['rname']?></td>
                           <td><?php if ($item['is_manager'] === '1'): ?>部门<?php else: ?>个人<?php endif; ?></td>
                           
                           <td> 

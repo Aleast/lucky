@@ -36,6 +36,7 @@ class Menu_model extends Base_model
     }
     public function getallname()
     {
+        $this->db->where('is_del', '0');
         $query = $this->db->get($this->table);
 
         $return = $query->result_array();
@@ -65,6 +66,7 @@ class Menu_model extends Base_model
     public function get_name($id)
     {
         $this->db->where('id', $id);
+//        $this->db->where('is_del', '0');
         if(!empty($this->datascope)){
             $this->db->where_in('mid', $this->datascope);//数据范围
         }

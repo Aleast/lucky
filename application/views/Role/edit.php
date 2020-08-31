@@ -27,15 +27,17 @@
                 权限名称:
             </label>
             <input type="hidden" name="id" value="<?=$menu['id']?>">
-            <input type="text"  name="name" autocomplete="off"  class="layui-input" value='<?=$menu['name']?>'>
+            <div class="layui-input-inline">
+                <input type="text"  name="name" autocomplete="off"  class="layui-input" value='<?=$menu['name']?>'>
+            </div>
             <?php foreach ($menu_info as $item): ?>
             <div class="layui-form-item">
                 <label for="M_name" class="layui-form-label">
                     <?=$item['name']?>:
                 </label>
                 <input type="hidden" name="M_id[]" value="<?=$item['id']?>">
-                <?php $role = str_split($item['role'])?>
-                <i class="layui-anim layui-icon">
+                <div class="layui-input-block">
+                    <?php $role = str_split($item['role'])?>
                     <input type="checkbox" name="M_menu[]" value="<?=$role['0']?>"
                         <?php if ($role['0'] === "1"): ?>
                             checked="checked"
@@ -56,7 +58,7 @@
                             checked="checked"
                         <?php endif; ?>
                     /> 查看
-                </i>
+                </div>
             </div>
             <?php endforeach;?>
             <div class="layui-form-item">

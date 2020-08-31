@@ -19,9 +19,6 @@ class Cmenu_model extends Base_model {
     {
 
         $this->db->where('is_del', "0");//0没有删除
-        if(!empty($this->datascope)){
-            $this->db->where_in('mid', $this->datascope);//数据范围
-        }
 
 
         return $this->db->count_all_results($this->table);
@@ -48,9 +45,7 @@ class Cmenu_model extends Base_model {
 
         $this->db->where('menu.is_del', "0");//0没有删除
 
-        if(!empty($this->datascope)){
-            $this->db->where_in('mid', $this->datascope);//数据范围
-        }
+
 
         $this->db->order_by('menu.id desc');//0没有删除
 
@@ -63,9 +58,7 @@ class Cmenu_model extends Base_model {
     public function get_name_id($id)
     {
         $this->db->where('id', $id);
-        if(!empty($this->datascope)){
-            $this->db->where_in('id', $this->datascope);//数据范围
-        }
+
         $query = $this->db->get($this->table);
         return $query->row('name');
     }
@@ -115,9 +108,7 @@ class Cmenu_model extends Base_model {
 
         
         $this->db->where('menu.is_del', "0");//0没有删除
-        if(!empty($this->datascope)){
-            $this->db->where_in('menu.id', $this->datascope);//数据范围
-        }
+
 		// $this->db->join('dept', 'manager.deptid = dept.id','left');
         $this->db->order_by('menu.id desc');//0没有删除
 
@@ -136,9 +127,7 @@ class Cmenu_model extends Base_model {
 
         
         $this->db->where('menu.is_del', "0");//0没有删除
-        if(!empty($this->datascope)){
-            $this->db->where_in('menu.id', $this->datascope);//数据范围
-        }
+
 		$this->db->join('dept', 'menu.deptid = dept.id','left');
 
         $query = $this->db->get($this->table);
@@ -152,9 +141,7 @@ class Cmenu_model extends Base_model {
     {
 
         $this->db->where('menu.is_del', "0");//0没有删除
-        if(!empty($this->datascope)){
-            $this->db->where_in('menu.id', $this->datascope);//数据范围
-        }
+
         $this->db->where('menu.pid', "0");
         $this->db->order_by('order desc');
 
@@ -169,9 +156,7 @@ class Cmenu_model extends Base_model {
     {
 
         $this->db->where('menu.is_del', "0");//0没有删除
-        if(!empty($this->datascope)){
-            $this->db->where_in('menu.id', $this->datascope);//数据范围
-        }
+
         $this->db->where('menu.pid >', "0");
         $this->db->order_by('order desc');
 
@@ -235,9 +220,7 @@ class Cmenu_model extends Base_model {
         $delllist=$this->input->post_get('dellist', TRUE);
        
         $this->db->set('is_del', '1');
-        if(!empty($this->datascope)){
-            $this->db->where_in('id', $this->datascope);//数据范围
-        }
+
         $this->db->where_in('id', $delllist);
         $this->db->update($this->table);
         
@@ -271,9 +254,7 @@ class Cmenu_model extends Base_model {
         // var_dump($data);exit;
           
         $this->db->where('id', $id);
-        if(!empty($this->datascope)){
-            $this->db->where_in('id', $this->datascope);//数据范围
-        }
+
         $this->db->update($this->table,$data);
         
         return $this->db->affected_rows();;
@@ -297,9 +278,7 @@ class Cmenu_model extends Base_model {
         $id=$this->input->post_get('id', TRUE);
         
         $this->db->where('id', $id);
-        if(!empty($this->datascope)){
-            $this->db->where_in('id', $this->datascope);//数据范围
-        }
+
         $this->db->update($this->table,$data);
         
         return $this->db->affected_rows();
@@ -317,9 +296,6 @@ class Cmenu_model extends Base_model {
 	{
 		$this->id  = $this->input->post_get('id', TRUE);// please read the below note
         $this->db->where('id', $this->id);
-        if(!empty($this->datascope)){
-            $this->db->where_in('id', $this->datascope);//数据范围
-        }
 		$query = $this->db->get($this->table);
 
 		return $query->row();
@@ -329,9 +305,6 @@ class Cmenu_model extends Base_model {
     public function get_id_name($name)
     {
         $this->db->where('name', $name);
-        if(!empty($this->datascope)){
-            $this->db->where_in('id', $this->datascope);//数据范围
-        }
         $query = $this->db->get($this->table);
 
         $result = $query->row_array();
@@ -341,9 +314,6 @@ class Cmenu_model extends Base_model {
     public function getinfo_f()
     {
         $this->db->where('pid', "0");
-        if(!empty($this->datascope)){
-            $this->db->where_in('id', $this->datascope);//数据范围
-        }
         $query = $this->db->get($this->table);
 
         return $query->result_array();

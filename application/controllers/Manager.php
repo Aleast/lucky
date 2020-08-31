@@ -26,6 +26,8 @@ class Manager extends Base {
         }
 		$data['total_rows']=$this->manager_model->get_count();  
 		$data['list'] = $this->manager_model->get_user();
+		$data['list'] = $this->role_model->get_user_rname($data['list']);
+//		var_dump($data['list']);die();
 		$this->load->view($this->path.'/list',$data);
 	}
 

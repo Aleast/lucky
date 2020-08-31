@@ -34,10 +34,6 @@ class Role_model extends Base_model
     {
 
         $this->db->where('is_del', "0");//0没有删除
-        if(!empty($this->datascope)){
-            $this->db->where_in('mid', $this->datascope);//数据范围
-        }
-
 
         return $this->db->count_all_results($this->table);
 
@@ -62,10 +58,6 @@ class Role_model extends Base_model
         }
 //        $this->db->select('role.*,manager.username,manager.nickname,dept.name as deptname,manager.is_del as m_is_del');
         $this->db->where('role.is_del', "0");//0没有删除
-
-        if(!empty($this->datascope)){
-            $this->db->where_in('mid', $this->datascope);//数据范围
-        }
 
         $this->db->order_by('role.id desc');//0没有删除
 
@@ -162,9 +154,7 @@ class Role_model extends Base_model
         $delllist = $this->input->post_get('dellist', true);
         $this->db->set('is_del', '1');
         $this->db->where_in('id', $delllist);
-        if(!empty($this->datascope)){
-            $this->db->where_in('mid', $this->datascope);//数据范围
-        }
+
         $this->db->update($this->table);
         return $this->db->affected_rows();
     }
@@ -204,9 +194,7 @@ class Role_model extends Base_model
         $data_role['addtime'] = time();
 //        var_dump($data_role);die();
         $this->db->where('id', $data['id']);
-        if(!empty($this->datascope)){
-            $this->db->where_in('mid', $this->datascope);//数据范围
-        }
+
         $this->db->update($this->table, $data_role);
 
         return $this->db->affected_rows();
@@ -218,9 +206,7 @@ class Role_model extends Base_model
     {
         $this->id = $this->input->post_get('id', true);// please read the below note
         $this->db->where('id', $this->id);
-        if(!empty($this->datascope)){
-            $this->db->where_in('mid', $this->datascope);//数据范围
-        }
+
         $query = $this->db->get($this->table);
 
         return $query->row();
@@ -232,9 +218,7 @@ class Role_model extends Base_model
     {
 
         $this->db->where('id', $id);
-        if(!empty($this->datascope)){
-            $this->db->where_in('mid', $this->datascope);//数据范围
-        }
+
         $query = $this->db->get($this->table);
         return $query->row();
 
@@ -243,11 +227,19 @@ class Role_model extends Base_model
     {
 
         $this->db->where('id', $id);
-        if(!empty($this->datascope)){
-            $this->db->where_in('mid', $this->datascope);//数据范围
-        }
         $query = $this->db->get($this->table);
         return $query->row_array();
+
+    }
+
+    public function get_id_name($id)
+    {
+
+        $this->db->where('id', $id);
+
+        $query = $this->db->get($this->table);
+        $result = $query->row_array();
+        return $result['name'];
 
     }
 
@@ -256,9 +248,7 @@ class Role_model extends Base_model
     {
         $this->id = $this->input->post_get('id', true);// please read the below note
         $this->db->where('id', $this->id);
-        if(!empty($this->datascope)){
-            $this->db->where_in('mid', $this->datascope);//数据范围
-        }
+
         $query = $this->db->get($this->table);
         return $query->row();
 
@@ -268,9 +258,7 @@ class Role_model extends Base_model
     {
 
         $this->db->where('cphone', $cphone);
-        if(!empty($this->datascope)){
-            $this->db->where_in('mid', $this->datascope);//数据范围
-        }
+
         $query = $this->db->get($this->table);
         return $query->row();
 
@@ -282,10 +270,6 @@ class Role_model extends Base_model
         if(empty($ids)){
             $this->db->select('role.*,manager.username,manager.nickname,dept.name as deptname,manager.is_del as m_is_del');
             $this->db->where('role.is_del', "0");//0没有删除
-
-            if(!empty($this->datascope)){
-                $this->db->where_in('mid', $this->datascope);//数据范围
-            }
 
             $this->db->order_by('role.id desc');//0没有删除
 
@@ -302,6 +286,13 @@ class Role_model extends Base_model
         }
 
 
+    }
+    public function get_user_rname($data)
+    {
+        foreach ($data as $k=>$v){
+            $data[$k]['rname'] = $this->get_id_name($v['rid']);
+        }
+        return $data;
     }
     function object_to_array($obj) {
         $obj = (array)$obj;
