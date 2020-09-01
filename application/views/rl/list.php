@@ -451,5 +451,53 @@
           });
         }
       }
+      function filterZoneSubmit(t){
+
+          var params = getParams(window.location.href);
+
+          // console.log(params);
+          var suburl = window.location.protocol+"//"+window.location.host+window.location.port+window.location.pathname;
+          var desurl = "";
+          // console.log(suburl);
+          // return false;
+
+          if(params.limit!==undefined){
+              t["limit"] = params.limit;
+          }
+          if(params.pages!==undefined){
+              t["pages"] = params.pages;
+          }
+          console.log(t);
+          var d = "";
+          $.each(t, function(i,v) {
+              if(d==""){
+                  d +=i+"="+v;
+              }else{
+                  d +="&"+i+"="+v;
+              }
+
+          });
+          desurl = suburl + "?" + d;
+
+
+          console.log(desurl);
+          window.location.href = desurl;
+
+
+      }
+
+      function getParams(url){
+          var params = {};
+          if(url.indexOf("?")===-1){
+              return "";
+          }
+          var urls = url.split("?");
+          var arr = urls[1].split("&");
+          for (var i = 0, l = arr.length; i < l; i++) {
+              var a = arr[i].split("=");
+              params[a[0]] = a[1];
+          }
+          return params;
+      }
     </script>
 </html>
