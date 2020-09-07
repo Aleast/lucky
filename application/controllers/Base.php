@@ -33,7 +33,7 @@ class Base extends CI_Controller {
         $info = $this->manager_model->get_id_role($_SESSION['mid']);
         $role = $this->role_model->get_id_role($info['rid']);
         $result_role = "1";
-        if(!empty($role['menu'])&&count($role['menu'])>0){
+        if(!empty($role['menu'])){
             $role_info = json_decode($role['menu'],true);
             //查询当前菜单ID在该角色权限数据内的role数据
             foreach ($role_info as $k=>$v){
